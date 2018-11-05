@@ -174,6 +174,8 @@ public class ReceiveDataActivity extends AppCompatActivity {
 //            lists.add(new CardItem2(abc[0], abc[1], abc[2], abc[3], abc[4], abc[5]));
 //            mAdapter.notifyDataSetChanged();
 //            setDB(abc[0], data_detail[0], data_detail[1], data_detail[2], data_detail[3]);
+
+        finish();
     }
 
     // 시간에 따른 식사상태 구분;

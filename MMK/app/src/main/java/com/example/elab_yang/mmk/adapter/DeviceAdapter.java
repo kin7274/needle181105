@@ -148,20 +148,18 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
     static class ViewHolder extends RecyclerView.ViewHolder {
         CardView cardview;
 
-        ImageView deviceImageView;
         TextView deviceNameLabel;
         TextView deviceStatusLabel;
 
-        ImageView fetchActivityData;
-        ImageView showActivityTracks;
-        ImageView deviceInfoView;
-        ImageView deviceRemove;
+        TextView fetchActivityData;
+        TextView showActivityTracks;
+        TextView deviceInfoView;
+        TextView deviceRemove;
 
         ViewHolder(View view) {
             super(view);
             cardview = view.findViewById(R.id.card_view);
 
-            deviceImageView = view.findViewById(R.id.device_image);
             deviceNameLabel = view.findViewById(R.id.device_name);
             deviceStatusLabel = view.findViewById(R.id.device_status);
             fetchActivityData = view.findViewById(R.id.device_action_fetch_activity);
