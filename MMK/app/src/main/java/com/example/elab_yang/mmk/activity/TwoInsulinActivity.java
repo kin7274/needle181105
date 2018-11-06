@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +28,9 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
     TextView text11, text12, text13, text14;
     TextView text21, text22, text23, text24;
 
+    CheckBox checkbox11, checkbox12, checkbox13, checkbox14;
+    CheckBox checkbox21, checkbox22, checkbox23, checkbox24;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,21 +43,32 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
         text11 = (TextView) findViewById(R.id.text11);
         text12 = (TextView) findViewById(R.id.text12);
         text13 = (TextView) findViewById(R.id.text13);
-        text14 = (TextView) findViewById(R.id.text14);
+//        text14 = (TextView) findViewById(R.id.text14);
+
+        checkbox11 = (CheckBox) findViewById(R.id.checkbox11);
+        checkbox12 = (CheckBox) findViewById(R.id.checkbox12);
+        checkbox13 = (CheckBox) findViewById(R.id.checkbox13);
+        checkbox14 = (CheckBox) findViewById(R.id.checkbox14);
+
+        checkbox21 = (CheckBox) findViewById(R.id.checkbox21);
+        checkbox22 = (CheckBox) findViewById(R.id.checkbox22);
+        checkbox23 = (CheckBox) findViewById(R.id.checkbox23);
+        checkbox24 = (CheckBox) findViewById(R.id.checkbox24);
+
         text11.setOnClickListener(this);
         text12.setOnClickListener(this);
         text13.setOnClickListener(this);
-        text14.setOnClickListener(this);
+//        text14.setOnClickListener(this);
         text21 = (TextView) findViewById(R.id.text21);
         text22 = (TextView) findViewById(R.id.text22);
         text23 = (TextView) findViewById(R.id.text23);
-        text24 = (TextView) findViewById(R.id.text24);
+//        text24 = (TextView) findViewById(R.id.text24);
         text21.setOnClickListener(this);
         text22.setOnClickListener(this);
         text23.setOnClickListener(this);
-        text24.setOnClickListener(this);
-        Button button1 = (Button) findViewById(R.id.button1);
-        button1.setOnClickListener(this);
+//        text24.setOnClickListener(this);
+        Button set_btn = (Button) findViewById(R.id.set_btn);
+        set_btn.setOnClickListener(this);
     }
 
     @Override
@@ -74,7 +89,7 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
         // 지속형
         final String[] items5 = {getResources().getString(R.string.insulin_name4_0), getResources().getString(R.string.insulin_name4_1)};
         // spinner03 : 식사상태
-        final String[] items6 = {getResources().getString(R.string.state_0_0), getResources().getString(R.string.state_0_1), getResources().getString(R.string.state_0_2), getResources().getString(R.string.state_0_3)};
+//        final String[] items6 = {getResources().getString(R.string.state_0_0), getResources().getString(R.string.state_0_1), getResources().getString(R.string.state_0_2), getResources().getString(R.string.state_0_3)};
         // 임시사용 1번
         final String[] items99;
         // 임시사용 2번
@@ -147,21 +162,21 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
                 builder13.create();
                 builder13.show();
                 break;
-            case R.id.text14:
+//            case R.id.text14:
                 // 투약시간
-                ArrayAdapter<String> adapter14 = new ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice, items6);
-                adapter14.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
-                AlertDialog.Builder builder14 = new AlertDialog.Builder(this)
-                        .setTitle("1-4. 식사상태")
-                        .setNegativeButton("NO", null)
-                        .setItems(items6, (dialog, position) -> {
-//                                Toast.makeText(getApplicationContext(), "선택한 값 : " + items6[position], Toast.LENGTH_SHORT).show();
-                            set1[3] = items6[position];
-                            text14.setText(items6[position]);
-                        });
-                builder14.create();
-                builder14.show();
-                break;
+//                ArrayAdapter<String> adapter14 = new ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice, items6);
+//                adapter14.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
+//                AlertDialog.Builder builder14 = new AlertDialog.Builder(this)
+//                        .setTitle("1-4. 식사상태")
+//                        .setNegativeButton("NO", null)
+//                        .setItems(items6, (dialog, position) -> {
+////                                Toast.makeText(getApplicationContext(), "선택한 값 : " + items6[position], Toast.LENGTH_SHORT).show();
+//                            set1[3] = items6[position];
+//                            text14.setText(items6[position]);
+//                        });
+//                builder14.create();
+//                builder14.show();
+//                break;
             // 이제 2번째 약 설정
             case R.id.text21:
                 // 품목
@@ -229,28 +244,80 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
                 builder23.create();
                 builder23.show();
                 break;
-            case R.id.text24:
+//            case R.id.text24:
                 // 투약시간
-                ArrayAdapter<String> adapter24 = new ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice, items6);
-                adapter24.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
-                AlertDialog.Builder builder24 = new AlertDialog.Builder(this)
-                        .setTitle("2-4. 식사상태")
-                        .setNegativeButton("NO", null)
-                        .setItems(items6, (dialog, position) -> {
-//                                Toast.makeText(getApplicationContext(), "선택한 값 : " + items6[position], Toast.LENGTH_SHORT).show();
-                            set2[3] = items6[position];
-                            text24.setText(items6[position]);
-                        });
-                builder24.create();
-                builder24.show();
-                break;
-            case R.id.button1:
+//                ArrayAdapter<String> adapter24 = new ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice, items6);
+//                adapter24.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
+//                AlertDialog.Builder builder24 = new AlertDialog.Builder(this)
+//                        .setTitle("2-4. 식사상태")
+//                        .setNegativeButton("NO", null)
+//                        .setItems(items6, (dialog, position) -> {
+////                                Toast.makeText(getApplicationContext(), "선택한 값 : " + items6[position], Toast.LENGTH_SHORT).show();
+//                            set2[3] = items6[position];
+//                            text24.setText(items6[position]);
+//                        });
+//                builder24.create();
+//                builder24.show();
+//                break;
+            case R.id.set_btn:
                 // 저장
+                String result = "";
+                if(checkbox11.isChecked()) result += checkbox11.getText().toString();
+                if(checkbox12.isChecked()) result += checkbox12.getText().toString();
+                if(checkbox13.isChecked()) result += checkbox13.getText().toString();
+                if(checkbox14.isChecked()) result += checkbox14.getText().toString();
+//                Log.d(TAG, "onClick: result " + result);
+
+                String insulin_data1 = set1[0] + "/" + set1[1] + "/" + set1[2];
+                Log.d(TAG, "onClick: insulin_data1 = " + insulin_data1);
+                Log.d(TAG, "onClick: result " + result);
+
+
+                String result2 = "";
+                if(checkbox21.isChecked()) result2 += checkbox21.getText().toString();
+                if(checkbox22.isChecked()) result2 += checkbox22.getText().toString();
+                if(checkbox23.isChecked()) result2 += checkbox23.getText().toString();
+                if(checkbox24.isChecked()) result2 += checkbox24.getText().toString();
+
+                String insulin_data2 = set2[0] + "/" + set2[1] + "/" + set2[2];
+                Log.d(TAG, "onClick: insulin_data2 = " + insulin_data2);
+                Log.d(TAG, "onClick: result2 " + result2);
+
+                String cache_data_1 = "";  // 아침전
+                String cache_data_2 = "";  // 점심전
+                String cache_data_3 = "";  // 저녁전
+                String cache_data_4 = "";  // 취침전
+
+                if(checkbox11.isChecked()) cache_data_1 += insulin_data1 +"&";
+                if(checkbox21.isChecked()) cache_data_1 += insulin_data2;
+
+                if(checkbox12.isChecked()) cache_data_2 += insulin_data1 +"&";
+                if(checkbox22.isChecked()) cache_data_2 += insulin_data2;
+
+                if(checkbox13.isChecked()) cache_data_3 += insulin_data1 +"&";
+                if(checkbox23.isChecked()) cache_data_3 += insulin_data2;
+
+                if(checkbox14.isChecked()) cache_data_4 += insulin_data1 +"&";
+                if(checkbox24.isChecked()) cache_data_4 += insulin_data2;
+
+                Log.d(TAG, "onClick: cache_data_1" + cache_data_1);
+                Log.d(TAG, "onClick: cache_data_2" + cache_data_2);
+                Log.d(TAG, "onClick: cache_data_3" + cache_data_3);
+                Log.d(TAG, "onClick: cache_data_4" + cache_data_4);
+
+                // 캐시에 저장
                 SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
-                String set_data = set1[0] + "#" + set1[1] + "#" + set1[2] + "#" + set1[3] + "%" + set2[0] + "#" + set2[1] + "#" + set2[2] + "#" + set2[3];
-                editor.putString("SET_DATA", set_data);
-                Log.d(TAG, "set_data = " + set_data);
+//                String set_data = set1[0] + "#" + set1[1] + "#" + set1[2] + "#" + result + "%" + set2[0] + "#" + set2[1] + "#" + set2[2] + "#" + result2;
+                editor.putString("cache_data_1", cache_data_1);
+                editor.putString("cache_data_2", cache_data_2);
+                editor.putString("cache_data_3", cache_data_3);
+                editor.putString("cache_data_4", cache_data_4);
+
+                editor.putString("SET_DATA", "");
+
+//                editor.putString("SET_DATA", set_data);
+//                Log.d(TAG, "set_data = " + set_data);
                 editor.apply();
                 finish();
                 Toast.makeText(getApplicationContext(),"2개 저장햇슴돠", Toast.LENGTH_SHORT).show();

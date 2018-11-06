@@ -56,6 +56,9 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
     HashSet<Device> deviceDatabase = new HashSet<>();
     ArrayList<Device> deviceArrayList;
 
+    // 투약 갯수 플래그
+    int flag = 0;
+
     public DeviceAdapter(Context context, List<Device> deviceList) {
         this.context = context;
         this.deviceList = deviceList;
@@ -76,40 +79,83 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
         String deviceName = deviceList.get(position).getDeviceName();
         String deviceAddress = deviceList.get(position).getDeviceAddress();
 //        holder.deviceNameLabel.setText(deviceList.get(position).getDeviceName());
-        if(deviceList.get(position).getDeviceName().equals("NeedleBT")){
+        if (deviceList.get(position).getDeviceName().equals("NeedleBT")) {
             Log.d(TAG, "onBindViewHolder: 니들맞네");
-                    holder.deviceNameLabel.setText("니들");
+            holder.deviceNameLabel.setText("니들");
         } else {
             Log.d(TAG, "onBindViewHolder: 전용니들이 아니네");
-                    holder.deviceNameLabel.setText(deviceList.get(position).getDeviceName());
+            holder.deviceNameLabel.setText(deviceList.get(position).getDeviceName());
         }
         holder.deviceStatusLabel.setText(deviceList.get(position).getDeviceAddress());
+
+        // 동기화 -> 로티
+        holder.showActivityTracks.setOnClickListener((View v) -> {
+            SharedPreferences pref = context.getSharedPreferences("pref", MODE_PRIVATE);
+            String only_one_needle = "";
+            String only_one_needle_data = "";
+            String two_needle1 = "";
+            String two_needle2 = "";
+            String two_needle3 = "";
+            String two_needle4 = "";
+            String two_needle1_data = "";
+            String two_needle2_data = "";
+            String two_needle3_data = "";
+            String two_needle4_data = "";
+
+            only_one_needle_data = pref.getString("SET_DATA", only_one_needle);
+
+            two_needle1_data = pref.getString("cache_data_1", two_needle1);
+            two_needle2_data = pref.getString("cache_data_2", two_needle2);
+            two_needle3_data = pref.getString("cache_data_3", two_needle3);
+            two_needle4_data = pref.getString("cache_data_4", two_needle4);
+
+
+            if (only_one_needle_data == "" && two_needle1_data == "" && two_needle2_data == "" && two_needle3_data == "" && two_needle4_data == "") {
+                // 다 공백이면 설정을 안한거야
+                Log.d(TAG, "onBindViewHolder: 설정값 없음");
+                Snackbar.make(v, "인슐린을 설정해주세요", 3000).setAction("YES", v1 -> {
+                }).show();
+
+            } else if (only_one_needle_data == "" && (two_needle1_data != "" || two_needle2_data != "" || two_needle3_data != "" || two_needle4_data != "")) {
+                // 2개네 \\\
+                flag = 2;
+                Log.d(TAG, "onBindViewHolder: 2개 사용하네");
+//                Snackbar.make(v, "인슐린 2개 사용", 3000).setAction("YES", v1 -> {
+//                }).show();
+            } else {
+                flag = 1;
+                Log.d(TAG, "onBindViewHolder: 1개 사용하네");
+//                Snackbar.make(v, "인슐린 1개 사용", 3000).setAction("YES", v1 -> {
+//                }).show();
+            }
+
+            // 인텐트
+            Intent intent = new Intent(context, DeviceControlActivity.class);
+            intent.putExtra(DEVICEADDRESS, deviceAddress);
+            // flag = 1 : 1개 사용
+            // flag = 2 : 2개 사용
+            context.startActivity(intent);
+
+//            if (AAAA.equals("")) {
+//                Log.d(TAG, "onBindViewHolder: 설정부터해");
+////                Snackbar.make(v, "설정부터 해주세요", Snackbar.LENGTH_LONG).show();
+//                Snackbar.make(v, "설정부터 해주세요", 3000).setAction("YES", v1 -> {
+//                    // 할거
+//                }).show();
+//            } else {
+//                Log.d(TAG, "onBindViewHolder: 설정미리햇구나?");
+//                Intent intent = new Intent(context, DeviceControlActivity.class);
+//                intent.putExtra(DEVICEADDRESS, deviceAddress);
+//                context.startActivity(intent);
+//            }
+        });
 
         // 서비스 연결
         holder.fetchActivityData.setOnClickListener(v -> {
             Intent intent = new Intent(context, AutoReceiveActivity.class);
             intent.putExtra(DEVICEADDRESS, deviceAddress);
+            intent.putExtra("flag", flag);
             context.startActivity(intent);
-        });
-
-        // 동기화 -> 로티
-        holder.showActivityTracks.setOnClickListener((View v) -> {
-            SharedPreferences pref = context.getSharedPreferences("pref", MODE_PRIVATE);
-            String set_data = "";
-            String AAAA = "";
-            AAAA = pref.getString("SET_DATA", set_data);
-            if (AAAA.equals("")) {
-                Log.d(TAG, "onBindViewHolder: 설정부터해");
-//                Snackbar.make(v, "설정부터 해주세요", Snackbar.LENGTH_LONG).show();
-                Snackbar.make(v, "설정부터 해주세요", 3000).setAction("YES", v1 -> {
-                    // 할거
-                }).show();
-            } else {
-                Log.d(TAG, "onBindViewHolder: 설정미리햇구나?");
-                Intent intent = new Intent(context, DeviceControlActivity.class);
-                intent.putExtra(DEVICEADDRESS, deviceAddress);
-                context.startActivity(intent);
-            }
         });
 
         // 장치에 대한 간단한 설명

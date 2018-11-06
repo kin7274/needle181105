@@ -162,22 +162,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void onCreateDialog() {
-        final String [] items = {"1. 약 1개", "2. 약 2개", "3. 알약"};
+        final String [] items = {"인슐린 1개", "인슐린 2개", "알약"};
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setTitle("선택해");
             builder.setSingleChoiceItems(items, 0, (DialogInterface dialog, int which) -> {
                 Toast.makeText(MainActivity.this, items[which], Toast.LENGTH_SHORT).show();
                 if(which == 0){
                     // 약 1개
-                    Toast.makeText(getApplicationContext(),"니들 1개", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getApplicationContext(),"인슐린 1개", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(MainActivity.this, SettingInsulinActivity.class));
                 } else if(which == 1){
                     // 약 2개
-                    Toast.makeText(getApplicationContext(),"니들 2개", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getApplicationContext(),"인슐린 2개", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(MainActivity.this, TwoInsulinActivity.class));
                 } else {
                     // 알약
-                    Toast.makeText(getApplicationContext(),"알약설정페이지로", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getApplicationContext(),"알약설정페이지로", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"만드는 중", Toast.LENGTH_SHORT).show();
 //                    startActivity(new Intent(MainActivity.this, SettingInsulinActivity.class));
 
                 }

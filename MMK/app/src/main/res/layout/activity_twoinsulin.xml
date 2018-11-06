@@ -2,8 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="2">
+    android:orientation="vertical">
 
     <!--탭바 타이틀 : 인슐린 설정 페이지-->
     <android.support.v7.widget.Toolbar
@@ -20,133 +19,235 @@
             android:layout_gravity="center"
             android:layout_marginLeft="16dp"
             android:fontFamily="@font/my_font_family"
-            android:text="인슐린 두개 푝푝"
+            android:text="인슐린 2개를 설정해주세요"
             android:textColor="#ffffff"
             android:textSize="20sp"
             android:textStyle="normal" />
     </android.support.v7.widget.Toolbar>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:weightSum="8">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/my_font_family"
-            android:text="1번 인슐린 정보"
-            android:textColor="@color/black"
-            android:textSize="30sp" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize">
 
         <TextView
             android:id="@+id/text11"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
             android:fontFamily="@font/my_font_family"
+            android:gravity="center_vertical|center_horizontal"
             android:hint="1번 품목"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/text12"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/my_font_family"
-            android:hint="1번 하위품명"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/text13"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/my_font_family"
-            android:hint="단위"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/text14"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/my_font_family"
-            android:hint="1번 투약시간"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/my_font_family"
-            android:text="2번 인슐린 정보"
             android:textColor="@color/black"
             android:textSize="30sp" />
 
         <TextView
+            android:id="@+id/text12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text11"
+            android:layout_margin="4dp"
+            android:fontFamily="@font/my_font_family"
+            android:gravity="center_vertical|center_horizontal"
+            android:hint="1번 하위품명"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/text13"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text12"
+            android:layout_margin="4dp"
+            android:fontFamily="@font/my_font_family"
+            android:gravity="center_vertical|center_horizontal"
+            android:hint="1번 단위"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/text14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text13"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/my_font_family"
+            android:text="1번 투약 시간을 선택해주세요"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
+
+        <LinearLayout
+            android:id="@+id/ddd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text14"
+            android:layout_margin="4dp"
+            android:weightSum="4">
+
+            <CheckBox
+                android:id="@+id/checkbox11"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/my_font_family"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="아침전"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/checkbox12"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/my_font_family"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="점심전"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/checkbox13"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/my_font_family"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="저녁전"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/checkbox14"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/my_font_family"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="취침전"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+
+        <View
+            android:layout_below="@+id/ddd"
+            android:id="@+id/view"
+            android:layout_margin="16dp"
+            android:background="@color/colorAccent"
+            android:layout_width="match_parent"
+            android:layout_height="3dp" />
+
+
+        <TextView
+            android:layout_below="@+id/view"
             android:id="@+id/text21"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
             android:fontFamily="@font/my_font_family"
+            android:gravity="center_vertical|center_horizontal"
             android:hint="2번 품목"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/text22"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text21"
+            android:layout_margin="4dp"
             android:fontFamily="@font/my_font_family"
+            android:gravity="center_vertical|center_horizontal"
             android:hint="2번 하위품명"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/text23"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text22"
+            android:layout_margin="4dp"
             android:fontFamily="@font/my_font_family"
-            android:hint="단위"
+            android:gravity="center_vertical|center_horizontal"
+            android:hint="2번 단위"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/text24"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text23"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="8dp"
             android:fontFamily="@font/my_font_family"
-            android:hint="2번 투약시간"
+            android:text="2번 투약 시간을 선택해주세요"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="30sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text24"
+            android:layout_margin="4dp"
+            android:weightSum="4">
+
+            <CheckBox
+                android:id="@+id/checkbox21"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/my_font_family"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="아침전"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/checkbox22"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/my_font_family"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="점심전"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/checkbox23"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/my_font_family"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="저녁전"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/checkbox24"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/my_font_family"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="취침전"
+                android:textSize="20sp" />
+        </LinearLayout>
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/set_btn"
+            style="?attr/borderlessButtonStyle"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
             android:fontFamily="@font/my_font_family"
-            android:text="set"
+            android:text="저장하기"
             android:textColor="@color/black"
-            android:textSize="20sp" />
-    </LinearLayout>
+            android:textSize="30sp" />
+
+    </RelativeLayout>
 
 </LinearLayout>

@@ -19,79 +19,126 @@
             android:layout_gravity="center"
             android:layout_marginLeft="16dp"
             android:fontFamily="@font/my_font_family"
-            android:text="@string/set_insulin"
+            android:text="인슐린을 설정해주세요"
             android:textColor="#ffffff"
             android:textSize="20sp"
             android:textStyle="normal" />
     </android.support.v7.widget.Toolbar>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/my_font_family"
-            android:text="@string/insulin_title"
-            android:textColor="@color/black"
-            android:textSize="30sp" />
+        android:layout_marginTop="?attr/actionBarSize">
 
         <TextView
             android:id="@+id/text1"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
             android:fontFamily="@font/my_font_family"
+            android:gravity="center_vertical|center_horizontal"
             android:hint="품목"
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/text2"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text1"
+            android:layout_margin="8dp"
             android:fontFamily="@font/my_font_family"
+            android:gravity="center_vertical|center_horizontal"
             android:hint="1번 하위품명"
             android:textColor="@color/black"
-
-            android:textSize="18sp" />
+            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/text3"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text2"
+            android:layout_margin="8dp"
             android:fontFamily="@font/my_font_family"
+            android:gravity="center_vertical|center_horizontal"
             android:hint="단위"
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/text4"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text3"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="16dp"
             android:fontFamily="@font/my_font_family"
-            android:hint="1번 투약시간"
+            android:text="투약 시간을 선택해주세요"
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="30sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text4"
+            android:layout_margin="8dp"
+            android:weightSum="4">
+
+            <CheckBox
+                android:id="@+id/checkbox1"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/my_font_family"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="아침전"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/checkbox2"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/my_font_family"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="점심전"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/checkbox3"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/my_font_family"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="저녁전"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/checkbox4"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/my_font_family"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="취침전"
+                android:textSize="20sp" />
+        </LinearLayout>
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/set_btn"
             style="?attr/borderlessButtonStyle"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
             android:fontFamily="@font/my_font_family"
-            android:text="set"
+            android:text="저장하기"
             android:textColor="@color/black"
+            android:textSize="30sp" />
 
-            android:textSize="18sp" />
-
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>

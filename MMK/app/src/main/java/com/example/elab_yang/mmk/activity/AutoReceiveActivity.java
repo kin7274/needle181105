@@ -29,7 +29,9 @@ public class AutoReceiveActivity extends AppCompatActivity {
     private final static String TAG = AutoReceiveActivity.class.getSimpleName();
     Context mContext;
     TextView text1, text2;
-    //
+
+    int flag = 0;
+
     String deviceAddress = "";
 //    String[] message;
     String message = "";
@@ -42,6 +44,7 @@ public class AutoReceiveActivity extends AppCompatActivity {
             text2.setVisibility(View.VISIBLE);
             Intent intent = new Intent(AutoReceiveActivity.this, ReceiveDataActivity.class);
             intent.putExtra("BLE", abc);
+            intent.putExtra("flag", flag);
 //            message[0] ="";
             message ="";
             abc = "";
@@ -100,6 +103,8 @@ public class AutoReceiveActivity extends AppCompatActivity {
         set();
         //
         deviceAddress = getIntent().getStringExtra(DEVICEADDRESS);
+        flag = getIntent().getIntExtra("flag", flag);
+
         if (deviceAddress != null) {
             Log.d(TAG, "onCreate: " + deviceAddress);
         }
@@ -111,7 +116,9 @@ public class AutoReceiveActivity extends AppCompatActivity {
         bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
         //
 //        mBluetoothLeService.writeCharacteristic("o");
+        // sd카드 데이터 read
         mBluetoothLeService.writeCharacteristic("a");
+//        mBluetoothLeService.writeCharacteristic("c");
     }
 
     public void setLottie(){

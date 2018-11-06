@@ -29,63 +29,33 @@ public class ViewInsulinActivity extends AppCompatActivity {
         setToolbar();
         setStatusbar();
         //
-        TextView text11 = (TextView) findViewById(R.id.text11);
-        TextView text12 = (TextView) findViewById(R.id.text12);
-        TextView text13 = (TextView) findViewById(R.id.text13);
-        TextView text14 = (TextView) findViewById(R.id.text14);
-        // 2
-        TextView text21 = (TextView) findViewById(R.id.text21);
-        TextView text22 = (TextView) findViewById(R.id.text22);
-        TextView text23 = (TextView) findViewById(R.id.text23);
-        TextView text24 = (TextView) findViewById(R.id.text24);
+        TextView text1 = (TextView) findViewById(R.id.text1);
+        TextView text2 = (TextView) findViewById(R.id.text2);
+        TextView text3 = (TextView) findViewById(R.id.text3);
+        TextView text4 = (TextView) findViewById(R.id.text4);
+        TextView text5 = (TextView) findViewById(R.id.text5);
         //
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
-        String set_data = "";
-        String AAAA = null;
-        try {
-            AAAA = pref.getString("SET_DATA", set_data);
-            if (AAAA.contains("%")) {
-                // 이도류
-                String[] AAAAA = AAAA.split("%");
-                // AAAAA[0] = 1번;
-                // AAAAA[1] = 21번;
-                data_detail = AAAAA[0].split("#");
-//                Log.d(TAG, "[0] = " + data_detail[0]);  // 초속효성
-//                Log.d(TAG, "[1] = " + data_detail[1]);  // 애피드라
-//                Log.d(TAG, "[2] = " + data_detail[2]);  // 30
-//                Log.d(TAG, "[3] = " + data_detail[3]);  // 아침식전
-                text11.setText(data_detail[0]);
-                text12.setText(data_detail[1]);
-                text13.setText(data_detail[2]);
-                text14.setText(data_detail[3]);
+        String a1 = "";
+        String A1 = pref.getString("SET_DATA", a1);
+        text1.setText(A1);
 
-                data_detail2 = AAAAA[1].split("#");
-//                Log.d(TAG, "[0] = " + data_detail2[0]);  //
-//                Log.d(TAG, "[1] = " + data_detail2[1]);
-//                Log.d(TAG, "[2] = " + data_detail2[2]);
-//                Log.d(TAG, "[3] = " + data_detail2[3]);
-                text21.setText(data_detail2[0]);
-                text22.setText(data_detail2[1]);
-                text23.setText(data_detail2[2]);
-                text24.setText(data_detail2[3]);
-            } else {
-                // 일도류
-                data_detail = AAAA.split("#");
-//                Log.d(TAG, "[0] = " + data_detail[0]);
-//                Log.d(TAG, "[1] = " + data_detail[1]);
-//                Log.d(TAG, "[2] = " + data_detail[2]);
-//                Log.d(TAG, "[3] = " + data_detail[3]);
-                text11.setText(data_detail[0]);
-                text12.setText(data_detail[1]);
-                text13.setText(data_detail[2]);
-                text14.setText(data_detail[3]);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            // TODO 스낵바로 알림
-            Toast.makeText(getApplicationContext(), "인슐린을 설정해주세요!", Toast.LENGTH_SHORT).show();
-            finish();
-        }
+        String a2 = "";
+        String A2 = pref.getString("cache_data_1", a2);
+        text2.setText(A2);
+
+        String a3 = "";
+        String A3 = pref.getString("cache_data_2", a3);
+        text3.setText(A3);
+
+        String a4 = "";
+        String A4 = pref.getString("cache_data_3", a4);
+        text4.setText(A4);
+
+        String a5 = "";
+        String A5 = pref.getString("cache_data_4", a5);
+        text5.setText(A5);
+
     }
     public void setToolbar() {
         Toolbar mytoolbar = (Toolbar) findViewById(R.id.my_toolbar);

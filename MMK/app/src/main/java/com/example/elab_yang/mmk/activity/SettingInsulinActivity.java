@@ -15,6 +15,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +29,8 @@ public class SettingInsulinActivity extends AppCompatActivity implements View.On
     String[] set = {"", "", "", ""};
     TextView text1, text2, text3, text4;
 //    Boolean insulin_flag = true;
+    CheckBox checkbox1, checkbox2, checkbox3, checkbox4;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,11 +66,20 @@ public class SettingInsulinActivity extends AppCompatActivity implements View.On
         text3 = (TextView) findViewById(R.id.text3);
         text3.setOnClickListener(this);
         // 투약시간
-        text4 = (TextView) findViewById(R.id.text4);
-        text4.setOnClickListener(this);
+//        text4 = (TextView) findViewById(R.id.text4);
+//        text4.setOnClickListener(this);
+
+        checkbox1 = (CheckBox) findViewById(R.id.checkbox1);
+
+        checkbox2 = (CheckBox) findViewById(R.id.checkbox2);
+
+        checkbox3 = (CheckBox) findViewById(R.id.checkbox3);
+
+        checkbox4 = (CheckBox) findViewById(R.id.checkbox4);
+
         // 저-장
-        Button button1 = (Button) findViewById(R.id.button1);
-        button1.setOnClickListener(this);
+        Button set_btn = (Button) findViewById(R.id.set_btn);
+        set_btn.setOnClickListener(this);
     }
 
     // 다이얼로그 인터페이스
@@ -174,28 +186,64 @@ public class SettingInsulinActivity extends AppCompatActivity implements View.On
                 builder13.create();
                 builder13.show();
                 break;
-            case R.id.text4:
+//            case R.id.checkbox1:
+//                break;
+//            case R.id.checkbox2:
+//                break;
+//            case R.id.checkbox3:
+//                break;
+//            case R.id.checkbox4:
+//                break;
+
                 // 투약시간
-                ArrayAdapter<String> adapter14 = new ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice, items6);
-                adapter14.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
-                AlertDialog.Builder builder14 = new AlertDialog.Builder(this)
-                        .setTitle("1-4. 식사상태")
-                        .setNegativeButton("NO", null)
-                        .setItems(items6, (dialog, position) -> {
-//                                Toast.makeText(getApplicationContext(), "선택한 값 : " + items6[position], Toast.LENGTH_SHORT).show();
-                            set[3] = items6[position];
-                            text4.setText(items6[position]);
-                        });
-                builder14.create();
-                builder14.show();
-                break;
-            case R.id.button1:
+                // 체크박스로 바꾸자
+
+
+
+
+
+
+
+
+
+
+
+//                ArrayAdapter<String> adapter14 = new ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice, items6);
+//                adapter14.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
+//                AlertDialog.Builder builder14 = new AlertDialog.Builder(this)
+//                        .setTitle("1-4. 식사상태")
+//                        .setNegativeButton("NO", null)
+//                        .setItems(items6, (dialog, position) -> {
+////                                Toast.makeText(getApplicationContext(), "선택한 값 : " + items6[position], Toast.LENGTH_SHORT).show();
+//                            set[3] = items6[position];
+//                            text4.setText(items6[position]);
+//                        });
+//                builder14.create();
+//                builder14.show();
+//                break;
+
+            case R.id.set_btn:
                 // 저장
+
+                String result = "";  // 결과를 출력할 문자열  ,  항상 스트링은 빈문자열로 초기화 하는 습관을 가지자
+                if(checkbox1.isChecked()) result += checkbox1.getText().toString();
+                if(checkbox2.isChecked()) result += checkbox2.getText().toString();
+                if(checkbox3.isChecked()) result += checkbox3.getText().toString();
+                if(checkbox4.isChecked()) result += checkbox4.getText().toString();
+                Log.d(TAG, "onClick: result " + result);
+
                 SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
-                String set_data = set[0] + "#" + set[1] + "#" + set[2] + "#" + set[3] + "";
+//                String set_data = set[0] + "#" + set[1] + "#" + set[2] + "#" + set[3] + "";
+                String set_data = set[0] + "#" + set[1] + "#" + set[2] + "#" + result + "";
                 editor.putString("SET_DATA", set_data);
                 Log.d(TAG, "set_data = " + set_data);
+
+                editor.putString("cache_data_1", "");
+                editor.putString("cache_data_2", "");
+                editor.putString("cache_data_3", "");
+                editor.putString("cache_data_4", "");
+
                 editor.apply();
                 finish();
                 Toast.makeText(getApplicationContext(),"저장햇슴돠", Toast.LENGTH_SHORT).show();

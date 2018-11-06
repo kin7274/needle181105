@@ -32,56 +32,34 @@ public class ReceiveDataActivity extends AppCompatActivity {
     private MyRecyclerAdapter mAdapter;
     RecyclerView recycler_view;
     String[] data_detail = {"", "", "", ""};
-    String[] data_detail2 = {"", "", "", ""};
+//    String[] data_detail2 = {"", "", "", ""};
     // data_detail[0] = 품목;
     // data_detail[1] = 하위 품명;
     // data_detail[2] = 단위;
     // data_detail[3] = 투약시간;
+
+    int flag = 0;
+
+    String morning = "";
+    String afternoon = "";
+    String dinner = "";
+    String night = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_getdb);
 //        setRecyclerView();
+        flag = getIntent().getIntExtra("flag", flag);
+//        flag = 1 : 1개 사용
+//        flag = 2 : 2개 사용
+
+        Log.d(TAG, "onCreate: flag " + flag);
 
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         int i_start = pref.getInt("INDEX", 0);
         Log.d(TAG, "i_start = " + i_start);
         Log.d(TAG, i_start + "번째부터 블루투스값 받으면 돼");
-
-        String set_data = "";
-        String AAAA = null;
-        try {
-            AAAA = pref.getString("SET_DATA", set_data);
-            if (AAAA.contains("%")) {
-                // 이도류
-                Log.d(TAG, "이도류");
-                String[] AAAAA = AAAA.split("%");
-                // AAAA[0] = 내가 설정한 1번;
-                // AAAA[1] = 내가 설정한 2번;
-                data_detail = AAAAA[0].split("#");
-
-                data_detail2 = AAAAA[1].split("#");
-
-                // 이제 구분해보자
-                Log.d(TAG, "1[3] = " + data_detail[3]);
-                // data_detail[3] = 1번 투약시간
-                Log.d(TAG, "2[3] = " + data_detail2[3]);
-                // data_detail2[3] = 2번 투약시간
-
-            } else {
-                // 일도류
-                Log.d(TAG, "일도류");
-                data_detail = AAAA.split("#");
-                Log.d(TAG, "[0] = " + data_detail[0]);
-                Log.d(TAG, "[1] = " + data_detail[1]);
-                Log.d(TAG, "[2] = " + data_detail[2]);
-                Log.d(TAG, "[3] = " + data_detail[3]);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         db = new DB(this);
         Intent intent = getIntent();
@@ -90,34 +68,64 @@ public class ReceiveDataActivity extends AppCompatActivity {
         Log.d(TAG, "data = " + data);
 
         int i = getCharNumber(data, '&');
+        Log.d(TAG, "몇개의 데이터가 있을까? : " + i + "개 데이터 존재");
+
         int i_end = getCharNumber(data, '&');
 
-        ////////////////////////////////////
-        //
-        // i를 캐시에 저장하자
-        // BLE 전송 인덱스야, 책갈피
         SharedPreferences.Editor editor = pref.edit();
         editor.putInt("INDEX", i_end);
-        Log.d(TAG, "INDEX = " + i_end);
+        Log.d(TAG, "INDEX = " + i_end + "번째 데이터까지 읽어왔어.. 기억하자");
         editor.apply();
-        ////////////////////////////////////
 
-        Log.d(TAG, "몇개의 데이터가 있을까? " + i);
         String[] str = data.split("&");
-        data = "";
-
-
-//        Log.d(TAG, "str[0] = " + str[0]);
-//        Log.d(TAG, "str[1] = " + str[1]);
-//        Log.d(TAG, "str[2] = " + str[2]);
-//        Log.d(TAG, "str[3] = " + str[3]);
-//        Log.d(TAG, "str[4] = " + str[4]);
-//        Log.d(TAG, "str[5] = " + str[5]);
-
         sql = db.getWritableDatabase();
-//        db.onUpgrade(sql, 1, 2);
 
-//        for (int y = 0; y < i; y++) {
+
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        if (flag == 1) {
+            // 난 인슐린 한개만 쓰는거야
+            String set_data = "";
+            String only_one_needle_data = "";
+
+            only_one_needle_data = pref.getString("SET_DATA", set_data);
+
+            Log.d(TAG, "onCreate: only_one_needle_data " + only_one_needle_data);
+
+            data_detail = only_one_needle_data.split("/");
+//            data_detail[0] = 품목
+//            data_detail[1] = 품명
+//            data_detail[2] = 단위
+
+        } else if (flag == 2) {
+            // 난 2개 써
+            String a1 = "";
+            String a2 = "";
+            String a3 = "";
+            String a4 = "";
+
+            morning = pref.getString("cache_data_1", a1);
+            afternoon = pref.getString("cache_data_2", a2);
+            dinner = pref.getString("cache_data_3", a3);
+            night = pref.getString("cache_data_4", a4);
+
+            Log.d(TAG, "onCreate: morning " + morning);
+            Log.d(TAG, "onCreate: afternoon " + afternoon);
+            Log.d(TAG, "onCreate: dinner " + dinner);
+            Log.d(TAG, "onCreate: night " + night);
+
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         for (int y = i_start; y < i; y++) {
             Log.d(TAG, "지금 " + (y + 1) + "번째 진행중");
             Log.d(TAG, "str[y] 전체 = " + str[y]);
@@ -129,52 +137,10 @@ public class ReceiveDataActivity extends AppCompatActivity {
 
             abc = str[y].substring(0, 4) + "-" + str[y].substring(4, 6) + "-" + str[y].substring(6, 8) + "-" + str[y].substring(8, 10) + "-" + str[y].substring(10, 12);
             //                   년도                       월                             일                             시                               분
-//            Log.d(TAG, "지금 " + (y+1) + "번째 진행중");
-
-            // str[y].substring(8, 10) = 이게 시간값인데
-            int hh = Integer.parseInt(str[y].substring(8, 10));
-            // 지금은 hh시입니다!
-            String ddiyong = what_hh(hh);
-            // 비교
-            if (data_detail[3].equals(data_detail2[3])) {
-                // 둘이 한 세트구나?
-                // 한개로만 비교할게
-                if (ddiyong.equals(data_detail[3])) {
-                    // 둘다 1번
-                    setDB(abc, data_detail[0] + "," + data_detail2[0], data_detail[1] + "," + data_detail2[1], data_detail[2] + "," + data_detail2[2], data_detail2[3]);
-                } else {
-                    // 그럼 뭐임..
-                    // TODO 예외처리
-                    setDB(abc, null, null, null, null);
-                }
-            } else {
-                if (ddiyong.equals(data_detail[3])) {
-                    // 1번 약이구나
-                    setDB(abc, data_detail[0], data_detail[1], data_detail[2], data_detail[3]);
-
-                } else if (ddiyong.equals(data_detail2[3])) {
-                    // 2번 약이구나
-                    setDB(abc, data_detail2[0], data_detail2[1], data_detail2[2], data_detail2[3]);
-                } else {
-                    // 둘다 안썻네... 뭐임그럼..
-                    // TODO 예외처리
-                    setDB(abc, null, null, null, null);
-                }
-            }
 
             abc = "";
             data = "";
-
-//            int str_long = str.length;
-//            for(int z=0; z<str_long; z++) {
-//                str[z] = "";
-//            }
         }
-
-//            lists.add(new CardItem2(abc[0], abc[1], abc[2], abc[3], abc[4], abc[5]));
-//            mAdapter.notifyDataSetChanged();
-//            setDB(abc[0], data_detail[0], data_detail[1], data_detail[2], data_detail[3]);
-
         finish();
     }
 
@@ -195,22 +161,6 @@ public class ReceiveDataActivity extends AppCompatActivity {
             return "취침전";
         }
     }
-
-//    public void setRecyclerView() {
-//        recycler_view = (RecyclerView) findViewById(R.id.recycler_view);
-//        recycler_view.setHasFixedSize(false);
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-//        layoutManager.setReverseLayout(true);
-//        layoutManager.setStackFromEnd(true);
-//        recycler_view.setLayoutManager(layoutManager);
-//        try {
-//            lists = new ArrayList<>();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        mAdapter = new MyRecyclerAdapter(lists);
-//        recycler_view.setAdapter(mAdapter);
-//    }
 
     // 특정문자 반복 갯수 확인
     int getCharNumber(String str, char c) {
