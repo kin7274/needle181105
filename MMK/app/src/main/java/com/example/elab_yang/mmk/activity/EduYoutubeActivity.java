@@ -15,9 +15,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.dreamwalker.diabeteseducation.R;
-import com.dreamwalker.diabeteseducation.adapter.YoutubeAdapter;
-import com.dreamwalker.diabeteseducation.model.YoutubeItem;
+import com.example.elab_yang.mmk.R;
+import com.example.elab_yang.mmk.activity.YoutubeAdapter;
+import com.example.elab_yang.mmk.activity.YoutubeItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +54,7 @@ public class EduYoutubeActivity extends AppCompatActivity implements YoutubeAdap
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryPurle));
+        window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
     }
 
     // 툴바
@@ -67,31 +67,22 @@ public class EduYoutubeActivity extends AppCompatActivity implements YoutubeAdap
     // 1초 후 와이파이 권장 알람
     public void wifi_alarm(){
         mHandler = new Handler();
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            // 알람
-                            AlertDialog.Builder dialog = new AlertDialog.Builder(mContext)
-                                    .setTitle("주의")
-                                    .setMessage("3G/4G환경에서는 데이터 요금이 발생할 수 있습니다.")
-                                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int which) {
-                                        }
-                                    });
-                            dialog.create()
-                                    .show();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    // 1초 후
-                }, 1000);
-            }
+        runOnUiThread(() -> {
+            // 1초 후
+            mHandler.postDelayed(() -> {
+                try {
+                    // 알람
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(mContext)
+                            .setTitle("주의")
+                            .setMessage("3G/4G환경에서는 데이터 요금이 발생할 수 있습니다.")
+                            .setPositiveButton("확인", (dialogInterface, which) -> {
+                            });
+                    dialog.create()
+                            .show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }, 1000);
         });
     }
 
