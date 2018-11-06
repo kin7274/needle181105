@@ -5,9 +5,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -27,10 +29,10 @@ public class SettingInsulinActivity extends AppCompatActivity implements View.On
     Context mContext;
     // 설정한 1번 약
     String[] set = {"", "", "", ""};
-    TextView text1, text2, text3, text4;
-//    Boolean insulin_flag = true;
+    CardView card1, card2, card3;
+    TextView text1, text2, text3;
+    //    Boolean insulin_flag = true;
     CheckBox checkbox1, checkbox2, checkbox3, checkbox4;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,15 +58,24 @@ public class SettingInsulinActivity extends AppCompatActivity implements View.On
     }
 
     public void set() {
+        card1 = (CardView) findViewById(R.id.card1);
+        card1.setOnClickListener(this);
+
+        card2 = (CardView) findViewById(R.id.card2);
+        card2.setOnClickListener(this);
+
+        card3 = (CardView) findViewById(R.id.card3);
+        card3.setOnClickListener(this);
+
         // 상위품목
         text1 = (TextView) findViewById(R.id.text1);
-        text1.setOnClickListener(this);
+//        text1.setOnClickListener(this);
         // 하위품목
         text2 = (TextView) findViewById(R.id.text2);
-        text2.setOnClickListener(this);
+//        text2.setOnClickListener(this);
         // 단위
         text3 = (TextView) findViewById(R.id.text3);
-        text3.setOnClickListener(this);
+//        text3.setOnClickListener(this);
         // 투약시간
 //        text4 = (TextView) findViewById(R.id.text4);
 //        text4.setOnClickListener(this);
@@ -117,27 +128,25 @@ public class SettingInsulinActivity extends AppCompatActivity implements View.On
         //////////////
         // 스위치문
         switch (v.getId()) {
-            case R.id.text1:
+            case R.id.card1:
                 // 품목
                 ArrayAdapter<String> adapter11 = new ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice, items);
                 adapter11.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
+                // 리스트 목록 클릭 이벤트
                 AlertDialog.Builder builder11 = new AlertDialog.Builder(this)
-                        .setTitle("1-1. 종류")
-                        .setNegativeButton("NO", null)
-                        .setItems(items, new DialogInterface.OnClickListener() {
-                            // 리스트 목록 클릭 이벤트
-                            @Override
-                            public void onClick(DialogInterface dialog, int position) {
+                        .setTitle("품목")
+                        .setNegativeButton("취소", null)
+                        .setItems(items, (dialog, position) -> {
 //                                Toast.makeText(getApplicationContext(), "선택한 값 : " + items[position], Toast.LENGTH_SHORT).show();
-                                set[0] = items[position];
-                                // 메인 텍스트에 값 넣음
-                                text1.setText(items[position]);
-                            }
+                            set[0] = items[position];
+                            // 메인 텍스트에 값 넣음
+                            text1.setText(items[position]);
+                            card1.setBackgroundResource(R.color.colorAccent);
                         });
                 builder11.create();
                 builder11.show();
                 break;
-            case R.id.text2:
+            case R.id.card2:
                 // 하위품목
                 String mykinds = set[0];
                 if (mykinds.equals("초속효성")) {
@@ -155,28 +164,31 @@ public class SettingInsulinActivity extends AppCompatActivity implements View.On
                 adapter12.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
                 // 리스트 목록 클릭 이벤트
                 AlertDialog.Builder builder12 = new AlertDialog.Builder(this)
-                        .setTitle("1-2. 하위품명")
-                        .setNegativeButton("NO", null)
+                        .setTitle("하위품명")
+                        .setNegativeButton("취소", null)
                         .setItems(items99, (dialog, position) -> {
 //                                Toast.makeText(getApplicationContext(), "선택한 값 : " + items99[position], Toast.LENGTH_SHORT).show();
                             set[1] = items99[position];
                             text2.setText(items99[position]);
+                            card2.setBackgroundResource(R.color.colorAccent);
                         });
                 builder12.create();
                 builder12.show();
                 break;
-            case R.id.text3:
+            case R.id.card3:
                 // 단위
                 final EditText et = new EditText(this);
                 AlertDialog.Builder builder13 = new AlertDialog.Builder(this)
                         // 숫자만 입력가능하도록, 키패드를 띄울까?
-                        .setTitle("1-3. 단위")
-                        .setPositiveButton("저장", (dialog, position) -> {
+                        .setTitle("단위")
+                        .setPositiveButton("확인", (dialog, position) -> {
                             set[2] = et.getText().toString();
                             // 입력한 값이 숫자인지 확인
 //                                if (Pattern.matches("^[0-9]+$", settingdata1[2])) {
                             // 숫자인 경우
                             text3.setText(et.getText().toString());
+                            card3.setBackgroundResource(R.color.colorAccent);
+
 //                                } else {
                             // 숫자가 아니네?
 //                                    Toast.makeText(getApplicationContext(), "숫자만 입력해주세요", Toast.LENGTH_SHORT).show();
@@ -195,17 +207,8 @@ public class SettingInsulinActivity extends AppCompatActivity implements View.On
 //            case R.id.checkbox4:
 //                break;
 
-                // 투약시간
-                // 체크박스로 바꾸자
-
-
-
-
-
-
-
-
-
+            // 투약시간
+            // 체크박스로 바꾸자
 
 
 //                ArrayAdapter<String> adapter14 = new ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice, items6);
@@ -226,10 +229,10 @@ public class SettingInsulinActivity extends AppCompatActivity implements View.On
                 // 저장
 
                 String result = "";  // 결과를 출력할 문자열  ,  항상 스트링은 빈문자열로 초기화 하는 습관을 가지자
-                if(checkbox1.isChecked()) result += checkbox1.getText().toString();
-                if(checkbox2.isChecked()) result += checkbox2.getText().toString();
-                if(checkbox3.isChecked()) result += checkbox3.getText().toString();
-                if(checkbox4.isChecked()) result += checkbox4.getText().toString();
+                if (checkbox1.isChecked()) result += checkbox1.getText().toString();
+                if (checkbox2.isChecked()) result += checkbox2.getText().toString();
+                if (checkbox3.isChecked()) result += checkbox3.getText().toString();
+                if (checkbox4.isChecked()) result += checkbox4.getText().toString();
                 Log.d(TAG, "onClick: result " + result);
 
                 SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
@@ -246,7 +249,7 @@ public class SettingInsulinActivity extends AppCompatActivity implements View.On
 
                 editor.apply();
                 finish();
-                Toast.makeText(getApplicationContext(),"저장햇슴돠", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "저장햇슴돠", Toast.LENGTH_SHORT).show();
                 break;
         }
     }

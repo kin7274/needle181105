@@ -165,15 +165,6 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
             context.startActivity(intent);
         });
 
-        // 장치에 대한 간단한 설명
-        holder.deviceInfoView.setOnClickListener(v -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setTitle("투약기");
-            builder.setMessage("마법의 스마트니들");
-            builder.setPositiveButton(android.R.string.ok, (dialog, which) -> dialog.dismiss());
-            builder.show();
-        });
-
         // 연결장치 제거
         holder.deviceRemove.setOnClickListener(v -> {
             Log.e(TAG, "deviceAddress: --> " + deviceAddress);
@@ -218,7 +209,6 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
 
         TextView fetchActivityData;
         TextView showActivityTracks;
-        TextView deviceInfoView;
         TextView deviceRemove;
 
         ViewHolder(View view) {
@@ -226,10 +216,9 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
             cardview = view.findViewById(R.id.card_view);
 
             deviceNameLabel = view.findViewById(R.id.device_name);
-            deviceStatusLabel = view.findViewById(R.id.device_status);
+//            deviceStatusLabel = view.findViewById(R.id.device_status);
             fetchActivityData = view.findViewById(R.id.device_action_fetch_activity);
             showActivityTracks = view.findViewById(R.id.device_action_show_activity_tracks);
-            deviceInfoView = view.findViewById(R.id.device_info_image);
             deviceRemove = view.findViewById(R.id.device_info_trashcan);
         }
     }

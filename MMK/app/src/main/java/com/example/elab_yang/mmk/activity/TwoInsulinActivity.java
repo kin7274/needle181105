@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -25,8 +26,11 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
     String[] set1 = {"", "", "", ""};
     String[] set2 = {"", "", "", ""};
     //
-    TextView text11, text12, text13, text14;
-    TextView text21, text22, text23, text24;
+    CardView card11, card12, card13;
+    CardView card21, card22, card23;
+    //
+    TextView text11, text12, text13;
+    TextView text21, text22, text23;
 
     CheckBox checkbox11, checkbox12, checkbox13, checkbox14;
     CheckBox checkbox21, checkbox22, checkbox23, checkbox24;
@@ -39,7 +43,25 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
         set();
     }
 
-    public void set(){
+    public void set() {
+        card11 = (CardView) findViewById(R.id.card11);
+        card11.setOnClickListener(this);
+
+        card12 = (CardView) findViewById(R.id.card12);
+        card12.setOnClickListener(this);
+
+        card13 = (CardView) findViewById(R.id.card13);
+        card13.setOnClickListener(this);
+
+        card21 = (CardView) findViewById(R.id.card21);
+        card21.setOnClickListener(this);
+
+        card22 = (CardView) findViewById(R.id.card22);
+        card22.setOnClickListener(this);
+
+        card23 = (CardView) findViewById(R.id.card23);
+        card23.setOnClickListener(this);
+
         text11 = (TextView) findViewById(R.id.text11);
         text12 = (TextView) findViewById(R.id.text12);
         text13 = (TextView) findViewById(R.id.text13);
@@ -55,17 +77,17 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
         checkbox23 = (CheckBox) findViewById(R.id.checkbox23);
         checkbox24 = (CheckBox) findViewById(R.id.checkbox24);
 
-        text11.setOnClickListener(this);
-        text12.setOnClickListener(this);
-        text13.setOnClickListener(this);
+//        text11.setOnClickListener(this);
+//        text12.setOnClickListener(this);
+//        text13.setOnClickListener(this);
 //        text14.setOnClickListener(this);
         text21 = (TextView) findViewById(R.id.text21);
         text22 = (TextView) findViewById(R.id.text22);
         text23 = (TextView) findViewById(R.id.text23);
 //        text24 = (TextView) findViewById(R.id.text24);
-        text21.setOnClickListener(this);
-        text22.setOnClickListener(this);
-        text23.setOnClickListener(this);
+//        text21.setOnClickListener(this);
+//        text22.setOnClickListener(this);
+//        text23.setOnClickListener(this);
 //        text24.setOnClickListener(this);
         Button set_btn = (Button) findViewById(R.id.set_btn);
         set_btn.setOnClickListener(this);
@@ -96,7 +118,7 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
         final String[] items999;
         // 스위치문
         switch (v.getId()) {
-            case R.id.text11:
+            case R.id.card11:
                 // 품목
                 ArrayAdapter<String> adapter11 = new ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice, items);
                 adapter11.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
@@ -109,11 +131,12 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
                             set1[0] = items[position];
                             // 메인 텍스트에 값 넣음
                             text11.setText(items[position]);
+                            card11.setBackgroundResource(R.color.colorAccent);
                         });
                 builder11.create();
                 builder11.show();
                 break;
-            case R.id.text12:
+            case R.id.card12:
                 // 하위품목
                 String mykinds = set1[0];
                 if (mykinds.equals("초속효성")) {
@@ -137,11 +160,12 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
 //                                Toast.makeText(getApplicationContext(), "선택한 값 : " + items99[position], Toast.LENGTH_SHORT).show();
                             set1[1] = items99[position];
                             text12.setText(items99[position]);
+                            card12.setBackgroundResource(R.color.colorAccent);
                         });
                 builder12.create();
                 builder12.show();
                 break;
-            case R.id.text13:
+            case R.id.card13:
                 // 단위
                 final EditText et = new EditText(this);
                 AlertDialog.Builder builder13 = new AlertDialog.Builder(this)
@@ -153,6 +177,7 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
 //                                if (Pattern.matches("^[0-9]+$", settingdata1[2])) {
                             // 숫자인 경우
                             text13.setText(et.getText().toString());
+                            card13.setBackgroundResource(R.color.colorAccent);
 //                                } else {
                             // 숫자가 아니네?
 //                                    Toast.makeText(getApplicationContext(), "숫자만 입력해주세요", Toast.LENGTH_SHORT).show();
@@ -163,7 +188,7 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
                 builder13.show();
                 break;
 //            case R.id.text14:
-                // 투약시간
+            // 투약시간
 //                ArrayAdapter<String> adapter14 = new ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice, items6);
 //                adapter14.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
 //                AlertDialog.Builder builder14 = new AlertDialog.Builder(this)
@@ -178,7 +203,7 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
 //                builder14.show();
 //                break;
             // 이제 2번째 약 설정
-            case R.id.text21:
+            case R.id.card21:
                 // 품목
                 ArrayAdapter<String> adapter21 = new ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice, items);
                 adapter21.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
@@ -191,11 +216,12 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
                             set2[0] = items[position];
                             // 메인 텍스트에 값 넣음
                             text21.setText(items[position]);
+                            card21.setBackgroundResource(R.color.colorAccent);
                         });
                 builder21.create();
                 builder21.show();
                 break;
-            case R.id.text22:
+            case R.id.card22:
                 // 하위품목
                 String mykinds2 = set2[0];
                 if (mykinds2.equals("초속효성")) {
@@ -219,11 +245,12 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
 //                                Toast.makeText(getApplicationContext(), "선택한 값 : " + items99[position], Toast.LENGTH_SHORT).show();
                             set2[1] = items999[position];
                             text22.setText(items999[position]);
+                            card22.setBackgroundResource(R.color.colorAccent);
                         });
                 builder22.create();
                 builder22.show();
                 break;
-            case R.id.text23:
+            case R.id.card23:
                 // 단위
                 final EditText et2 = new EditText(this);
                 AlertDialog.Builder builder23 = new AlertDialog.Builder(this)
@@ -235,6 +262,7 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
 //                                if (Pattern.matches("^[0-9]+$", settingdata1[2])) {
                             // 숫자인 경우
                             text23.setText(et2.getText().toString());
+                            card23.setBackgroundResource(R.color.colorAccent);
 //                                } else {
                             // 숫자가 아니네?
 //                                    Toast.makeText(getApplicationContext(), "숫자만 입력해주세요", Toast.LENGTH_SHORT).show();
@@ -245,7 +273,7 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
                 builder23.show();
                 break;
 //            case R.id.text24:
-                // 투약시간
+            // 투약시간
 //                ArrayAdapter<String> adapter24 = new ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice, items6);
 //                adapter24.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
 //                AlertDialog.Builder builder24 = new AlertDialog.Builder(this)
@@ -262,10 +290,10 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
             case R.id.set_btn:
                 // 저장
                 String result = "";
-                if(checkbox11.isChecked()) result += checkbox11.getText().toString();
-                if(checkbox12.isChecked()) result += checkbox12.getText().toString();
-                if(checkbox13.isChecked()) result += checkbox13.getText().toString();
-                if(checkbox14.isChecked()) result += checkbox14.getText().toString();
+                if (checkbox11.isChecked()) result += checkbox11.getText().toString();
+                if (checkbox12.isChecked()) result += checkbox12.getText().toString();
+                if (checkbox13.isChecked()) result += checkbox13.getText().toString();
+                if (checkbox14.isChecked()) result += checkbox14.getText().toString();
 //                Log.d(TAG, "onClick: result " + result);
 
                 String insulin_data1 = set1[0] + "/" + set1[1] + "/" + set1[2];
@@ -274,10 +302,10 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
 
 
                 String result2 = "";
-                if(checkbox21.isChecked()) result2 += checkbox21.getText().toString();
-                if(checkbox22.isChecked()) result2 += checkbox22.getText().toString();
-                if(checkbox23.isChecked()) result2 += checkbox23.getText().toString();
-                if(checkbox24.isChecked()) result2 += checkbox24.getText().toString();
+                if (checkbox21.isChecked()) result2 += checkbox21.getText().toString();
+                if (checkbox22.isChecked()) result2 += checkbox22.getText().toString();
+                if (checkbox23.isChecked()) result2 += checkbox23.getText().toString();
+                if (checkbox24.isChecked()) result2 += checkbox24.getText().toString();
 
                 String insulin_data2 = set2[0] + "/" + set2[1] + "/" + set2[2];
                 Log.d(TAG, "onClick: insulin_data2 = " + insulin_data2);
@@ -288,17 +316,17 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
                 String cache_data_3 = "";  // 저녁전
                 String cache_data_4 = "";  // 취침전
 
-                if(checkbox11.isChecked()) cache_data_1 += insulin_data1 +"&";
-                if(checkbox21.isChecked()) cache_data_1 += "&" + insulin_data2;
+                if (checkbox11.isChecked()) cache_data_1 += insulin_data1 + "&";
+                if (checkbox21.isChecked()) cache_data_1 += "&" + insulin_data2;
 
-                if(checkbox12.isChecked()) cache_data_2 += insulin_data1 +"&";
-                if(checkbox22.isChecked()) cache_data_2 += "&" + insulin_data2;
+                if (checkbox12.isChecked()) cache_data_2 += insulin_data1 + "&";
+                if (checkbox22.isChecked()) cache_data_2 += "&" + insulin_data2;
 
-                if(checkbox13.isChecked()) cache_data_3 += insulin_data1 +"&";
-                if(checkbox23.isChecked()) cache_data_3 += "&" + insulin_data2;
+                if (checkbox13.isChecked()) cache_data_3 += insulin_data1 + "&";
+                if (checkbox23.isChecked()) cache_data_3 += "&" + insulin_data2;
 
-                if(checkbox14.isChecked()) cache_data_4 += insulin_data1 +"&";
-                if(checkbox24.isChecked()) cache_data_4 += "&" + insulin_data2;
+                if (checkbox14.isChecked()) cache_data_4 += insulin_data1 + "&";
+                if (checkbox24.isChecked()) cache_data_4 += "&" + insulin_data2;
 
                 Log.d(TAG, "onClick: cache_data_1" + cache_data_1);
                 Log.d(TAG, "onClick: cache_data_2" + cache_data_2);
@@ -320,7 +348,7 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
 //                Log.d(TAG, "set_data = " + set_data);
                 editor.apply();
                 finish();
-                Toast.makeText(getApplicationContext(),"2개 저장햇슴돠", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "2개 저장햇슴돠", Toast.LENGTH_SHORT).show();
                 break;
         }
     }

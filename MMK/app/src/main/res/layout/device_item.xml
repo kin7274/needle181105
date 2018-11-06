@@ -5,7 +5,9 @@
     android:layout_height="wrap_content"
     android:gravity="center_horizontal">
 
-    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    <android.support.v7.widget.CardView
+        android:backgroundTint="@color/weaker_yellow"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,46 +30,36 @@
                 android:fontFamily="@font/my_font_family"
                 android:gravity="center"
                 android:maxLines="1"
+                android:layout_marginTop="16dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textColor="@color/black"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 tools:text="device name" />
-
-            <TextView
-                android:id="@+id/device_status"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/device_name"
-                android:layout_alignStart="@+id/device_name"
-                android:fontFamily="@font/my_font_family"
-                android:gravity="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                tools:text="device address" />
 
             <TextView
                 android:id="@+id/device_action_show_activity_tracks"
                 android:layout_height="48dp"
                 android:layout_below="@id/device_name"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
                 android:focusable="true"
-                android:layout_width="70dp"
+                android:layout_width="100dp"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:fontFamily="@font/my_font_family"
                 android:gravity="center_vertical|center_horizontal"
                 android:text="서비스연결"
                 android:padding="4dp"
+                android:layout_marginLeft="4dp"
                 android:scaleType="fitXY" />
 
             <TextView
                 android:id="@+id/device_action_fetch_activity"
                 android:layout_height="48dp"
                 android:layout_below="@id/device_name"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="8dp"
                 android:layout_toEndOf="@id/device_action_show_activity_tracks"
                 android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
@@ -83,34 +75,17 @@
 
 
             <TextView
-                android:id="@+id/device_info_image"
+                android:layout_marginTop="16dp"
+                android:id="@+id/device_info_trashcan"
                 android:layout_height="48dp"
                 android:layout_below="@id/device_name"
-                android:layout_marginTop="32dp"
                 android:layout_toEndOf="@id/device_action_fetch_activity"
                 android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
                 android:focusable="true"
                 android:layout_width="70dp"
                 android:textColor="@color/black"
-                android:textSize="20sp"
-                android:fontFamily="@font/my_font_family"
-                android:gravity="center_vertical|center_horizontal"
-                android:text="정보"
-                android:padding="4dp"
-                android:scaleType="fitXY" />
-
-            <TextView
-                android:layout_marginTop="32dp"
-                android:id="@+id/device_info_trashcan"
-                android:layout_height="48dp"
-                android:layout_below="@id/device_name"
-                android:layout_toEndOf="@id/device_info_image"
-                android:background="?android:attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true"
-                android:layout_width="70dp"
-                android:textColor="@color/black"
+                android:layout_marginLeft="8dp"
                 android:textSize="20sp"
                 android:fontFamily="@font/my_font_family"
                 android:gravity="center_vertical|center_horizontal"

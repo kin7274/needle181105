@@ -48,7 +48,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         // 2초 뒤에 Runnable 객체 수행
-        handler.postDelayed(r, 2000);
+        handler.postDelayed(r, 1000);
     }
 
     @Override

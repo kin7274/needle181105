@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/yellow"
     android:orientation="vertical"
     tools:context=".activity.SplashActivity">
 
@@ -15,7 +15,7 @@
         android:fontFamily="@font/my_font_family"
         android:gravity="center"
         android:text="두-둥!"
-        android:textColor="#ffffff"
+        android:textColor="@color/black"
         android:textSize="40sp"
         android:textStyle="normal" />
 
@@ -25,7 +25,7 @@
         android:fontFamily="@font/my_font_family"
         android:gravity="center"
         android:text="당뇨 뿌셔!"
-        android:textColor="#ffffff"
+        android:textColor="@color/black"
         android:textSize="40sp" />
 
     <com.airbnb.lottie.LottieAnimationView
@@ -40,7 +40,7 @@
         android:fontFamily="@font/my_font_family"
         android:gravity="center"
         android:text="KNU.ELEC"
-        android:textColor="#ffffff"
+        android:textColor="@color/black"
         android:textSize="30sp" />
 </LinearLayout>
 

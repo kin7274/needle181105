@@ -24,8 +24,9 @@ public class ProfileActivity extends AppCompatActivity {
 
         EditText user_name = (EditText) findViewById(R.id.user_name);
         EditText user_age = (EditText) findViewById(R.id.user_age);
-        EditText user_blood_min = (EditText) findViewById(R.id.user_blood_min);
         EditText user_blood_max = (EditText) findViewById(R.id.user_blood_max);
+        EditText user_blood_min = (EditText) findViewById(R.id.user_blood_min);
+
         EditText user_weight = (EditText) findViewById(R.id.user_weight);
         EditText user_height = (EditText) findViewById(R.id.user_height);
         Button set_btn = (Button) findViewById(R.id.set_btn);

@@ -6,11 +6,13 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -65,20 +67,21 @@ public class EduYoutubeActivity extends AppCompatActivity implements YoutubeAdap
     }
 
     // 1초 후 와이파이 권장 알람
-    public void wifi_alarm(){
+    public void wifi_alarm() {
         mHandler = new Handler();
         runOnUiThread(() -> {
             // 1초 후
             mHandler.postDelayed(() -> {
                 try {
-                    // 알람
-                    AlertDialog.Builder dialog = new AlertDialog.Builder(mContext)
-                            .setTitle("주의")
-                            .setMessage("3G/4G환경에서는 데이터 요금이 발생할 수 있습니다.")
-                            .setPositiveButton("확인", (dialogInterface, which) -> {
-                            });
-                    dialog.create()
-                            .show();
+//                    AlertDialog.Builder dialog = new AlertDialog.Builder(mContext)
+//                            .setTitle("주의")
+//                            .setMessage("3G/4G환경에서는 데이터 요금이 발생할 수 있습니다.")
+//                            .setPositiveButton("확인", (dialogInterface, which) -> {
+//                            });
+//                    dialog.create()
+//                            .show();
+                    Snackbar.make(getWindow().getDecorView().getRootView(), "3G/4G환경에서는 데이터 요금이 발생할 수 있습니다.", 3000).setAction("확인", v -> {
+                    }).show();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -87,7 +90,7 @@ public class EduYoutubeActivity extends AppCompatActivity implements YoutubeAdap
     }
 
     // 리사이클러뷰
-    public void recyclerview_dduddak(){
+    public void recyclerview_dduddak() {
         // 리사이클러뷰
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(false);
@@ -110,7 +113,7 @@ public class EduYoutubeActivity extends AppCompatActivity implements YoutubeAdap
         youtubeList.add(new YoutubeItem(R.mipmap.youtube_image_10, "뇌졸중과 당뇨병은 어떤 연관성이 있나요?[1분 메디캠_뇌졸중 편]"));
         // 출처
         youtubeList.add(new YoutubeItem(R.mipmap.img_opentype04, "인포그래픽 동영상_'13년_당뇨병편 저작물은 \n" + "공공누리 제4유형(출처표시+상업적이용금지+변경금지) 조건에 따라 이용할 수 있습니다."));
-        youtubeList.add(new YoutubeItem(R.mipmap.samsungseoulhospital, "출처 : 삼성서울병원\n" +"더 자세한 정보를 얻고싶다면 홈페이지를 방문해주세요. 클릭시 이동합니다."));
+        youtubeList.add(new YoutubeItem(R.mipmap.samsungseoulhospital, "출처 : 삼성서울병원\n" + "더 자세한 정보를 얻고싶다면 홈페이지를 방문해주세요. 클릭시 이동합니다."));
 
         // 어댑터
         YoutubeAdapter mYouItems = new YoutubeAdapter(youtubeList);
@@ -122,7 +125,7 @@ public class EduYoutubeActivity extends AppCompatActivity implements YoutubeAdap
     @Override
     public void onItemClicked(int position) {
 //        Toast.makeText(getApplicationContext(), "선택값 = " + position, Toast.LENGTH_SHORT).show();
-        if(position !=10){
+        if (position != 10) {
             onURL(youtube_link[position]);
         }
     }

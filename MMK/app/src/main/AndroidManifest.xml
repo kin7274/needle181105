@@ -106,9 +106,9 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
-        <!--환경설정-->
+        <!--앱 사용 가이던스 페이지-->
         <activity
-            android:name=".activity.SettingActivity"
+            android:name=".activity.AppGuidenceActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
