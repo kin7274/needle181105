@@ -7,8 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.dreamwalker.diabeteseducation.R;
-import com.dreamwalker.diabeteseducation.model.YoutubeItem;
+import com.example.elab_yang.mmk.R;
 
 import java.util.List;
 
