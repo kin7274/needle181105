@@ -97,20 +97,20 @@ public class EduYoutubeActivity extends AppCompatActivity implements YoutubeAdap
         // 리스트 생성
         List<YoutubeItem> youtubeList = new ArrayList<>();
         //// 질병관리본부
-        youtubeList.add(new YoutubeItem(R.drawable.youtube_image_01, "[질병관리본부 - 심뇌혈관질환예방관리]_인포그래픽 동영상_'13년_당뇨병편"));
+        youtubeList.add(new YoutubeItem(R.mipmap.youtube_image_01, "[질병관리본부 - 심뇌혈관질환예방관리]_인포그래픽 동영상_'13년_당뇨병편"));
         //// 삼성서울병원
-        youtubeList.add(new YoutubeItem(R.drawable.youtube_image_02, "으랏차차_당뇨_1_당신의 혈당은 안녕하십니까 - 내분비대사내과 김재현 교수[의료진 ON Line 강의]"));
-        youtubeList.add(new YoutubeItem(R.drawable.youtube_image_03, "으랏차차_당뇨_2_당뇨병, 피할 수 있는 방안은 - 내분비대사내과 김재현 교수[의료진 ON Line 강의]"));
-        youtubeList.add(new YoutubeItem(R.drawable.youtube_image_04, "으랏차차_당뇨_3_당뇨병 전단계를 관리하는 법 - 내분비대사내과 김재현 교수[의료진 ON Line 강의]"));
-        youtubeList.add(new YoutubeItem(R.drawable.youtube_image_05, "으랏차차_당뇨_4_당뇨,발견했다면 이것만은 챙기자 - 내분비대사내과 허규연 교수[의료진 ON Line 강의]"));
-        youtubeList.add(new YoutubeItem(R.drawable.youtube_image_06, "으랏차차_당뇨_5_당뇨관리, 밥상과 운동에 답이 있다 - 내분비대사내과 허규연 교수[의료진 ON Line 강의]"));
-        youtubeList.add(new YoutubeItem(R.drawable.youtube_image_07, "으랏차차_당뇨_6_당뇨에 관한 10가지 오해와 진실 - 내분비대사내과 허규연 교수[의료진 ON Line 강의]"));
-        youtubeList.add(new YoutubeItem(R.drawable.youtube_image_08, "자가혈당측정 똑똑하게 활용하기[환자설명자료]"));
-        youtubeList.add(new YoutubeItem(R.drawable.youtube_image_09, "저혈당의 예방과 치료[환자설명자료]"));
-        youtubeList.add(new YoutubeItem(R.drawable.youtube_image_10, "뇌졸중과 당뇨병은 어떤 연관성이 있나요?[1분 메디캠_뇌졸중 편]"));
+        youtubeList.add(new YoutubeItem(R.mipmap.youtube_image_02, "으랏차차_당뇨_1_당신의 혈당은 안녕하십니까 - 내분비대사내과 김재현 교수[의료진 ON Line 강의]"));
+        youtubeList.add(new YoutubeItem(R.mipmap.youtube_image_03, "으랏차차_당뇨_2_당뇨병, 피할 수 있는 방안은 - 내분비대사내과 김재현 교수[의료진 ON Line 강의]"));
+        youtubeList.add(new YoutubeItem(R.mipmap.youtube_image_04, "으랏차차_당뇨_3_당뇨병 전단계를 관리하는 법 - 내분비대사내과 김재현 교수[의료진 ON Line 강의]"));
+        youtubeList.add(new YoutubeItem(R.mipmap.youtube_image_05, "으랏차차_당뇨_4_당뇨,발견했다면 이것만은 챙기자 - 내분비대사내과 허규연 교수[의료진 ON Line 강의]"));
+        youtubeList.add(new YoutubeItem(R.mipmap.youtube_image_06, "으랏차차_당뇨_5_당뇨관리, 밥상과 운동에 답이 있다 - 내분비대사내과 허규연 교수[의료진 ON Line 강의]"));
+        youtubeList.add(new YoutubeItem(R.mipmap.youtube_image_07, "으랏차차_당뇨_6_당뇨에 관한 10가지 오해와 진실 - 내분비대사내과 허규연 교수[의료진 ON Line 강의]"));
+        youtubeList.add(new YoutubeItem(R.mipmap.youtube_image_08, "자가혈당측정 똑똑하게 활용하기[환자설명자료]"));
+        youtubeList.add(new YoutubeItem(R.mipmap.youtube_image_09, "저혈당의 예방과 치료[환자설명자료]"));
+        youtubeList.add(new YoutubeItem(R.mipmap.youtube_image_10, "뇌졸중과 당뇨병은 어떤 연관성이 있나요?[1분 메디캠_뇌졸중 편]"));
         // 출처
-        youtubeList.add(new YoutubeItem(R.drawable.img_opentype04, "인포그래픽 동영상_'13년_당뇨병편 저작물은 \n" + "공공누리 제4유형(출처표시+상업적이용금지+변경금지) 조건에 따라 이용할 수 있습니다."));
-        youtubeList.add(new YoutubeItem(R.drawable.samsungseoulhospital, "출처 : 삼성서울병원\n" +"더 자세한 정보를 얻고싶다면 홈페이지를 방문해주세요. 클릭시 이동합니다."));
+        youtubeList.add(new YoutubeItem(R.mipmap.img_opentype04, "인포그래픽 동영상_'13년_당뇨병편 저작물은 \n" + "공공누리 제4유형(출처표시+상업적이용금지+변경금지) 조건에 따라 이용할 수 있습니다."));
+        youtubeList.add(new YoutubeItem(R.mipmap.samsungseoulhospital, "출처 : 삼성서울병원\n" +"더 자세한 정보를 얻고싶다면 홈페이지를 방문해주세요. 클릭시 이동합니다."));
 
         // 어댑터
         YoutubeAdapter mYouItems = new YoutubeAdapter(youtubeList);

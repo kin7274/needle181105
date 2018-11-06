@@ -133,31 +133,31 @@ public class DataBaseActivity extends AppCompatActivity {
 
     public int setImage(String str) {
         if (str.equals("초속효성")) {
-            return R.drawable.red;
+            return R.mipmap.red;
         } else if (str.equals("속효성")) {
-            return R.drawable.bae;
+            return R.mipmap.bae;
         } else if (str.equals("중간성")) {
-            return R.drawable.green;
+            return R.mipmap.green;
         } else if (str.equals("지속성")) {
-            return R.drawable.yellow;
+            return R.mipmap.yellow;
         } else if (str.equals("혼합형")) {
-            return R.drawable.blue;
+            return R.mipmap.blue;
         } else {
-            return R.drawable.ic_launcher_background;
+            return R.mipmap.ic_launcher_background;
         }
     }
 
     public int setImage2(String str) {
         if (str.equals("아침식전")) {
-            return R.drawable.red1;
+            return R.mipmap.red1;
         } else if (str.equals("점심식전")) {
-            return R.drawable.blue1;
+            return R.mipmap.blue1;
         } else if (str.equals("저녁식전")) {
-            return R.drawable.bae1;
+            return R.mipmap.bae1;
         } else if (str.equals("취침전")) {
-            return R.drawable.yellow1;
+            return R.mipmap.yellow1;
         } else {
-            return R.drawable.ic_launcher_background;
+            return R.mipmap.ic_launcher_background;
         }
     }
 
