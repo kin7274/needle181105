@@ -289,16 +289,16 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
                 String cache_data_4 = "";  // 취침전
 
                 if(checkbox11.isChecked()) cache_data_1 += insulin_data1 +"&";
-                if(checkbox21.isChecked()) cache_data_1 += insulin_data2;
+                if(checkbox21.isChecked()) cache_data_1 += "&" + insulin_data2;
 
                 if(checkbox12.isChecked()) cache_data_2 += insulin_data1 +"&";
-                if(checkbox22.isChecked()) cache_data_2 += insulin_data2;
+                if(checkbox22.isChecked()) cache_data_2 += "&" + insulin_data2;
 
                 if(checkbox13.isChecked()) cache_data_3 += insulin_data1 +"&";
-                if(checkbox23.isChecked()) cache_data_3 += insulin_data2;
+                if(checkbox23.isChecked()) cache_data_3 += "&" + insulin_data2;
 
                 if(checkbox14.isChecked()) cache_data_4 += insulin_data1 +"&";
-                if(checkbox24.isChecked()) cache_data_4 += insulin_data2;
+                if(checkbox24.isChecked()) cache_data_4 += "&" + insulin_data2;
 
                 Log.d(TAG, "onClick: cache_data_1" + cache_data_1);
                 Log.d(TAG, "onClick: cache_data_2" + cache_data_2);
