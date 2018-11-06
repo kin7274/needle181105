@@ -122,19 +122,26 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
                 Log.d(TAG, "onBindViewHolder: 2개 사용하네");
 //                Snackbar.make(v, "인슐린 2개 사용", 3000).setAction("YES", v1 -> {
 //                }).show();
+                Intent intent = new Intent(context, DeviceControlActivity.class);
+                intent.putExtra(DEVICEADDRESS, deviceAddress);
+                context.startActivity(intent);
             } else {
                 flag = 1;
                 Log.d(TAG, "onBindViewHolder: 1개 사용하네");
 //                Snackbar.make(v, "인슐린 1개 사용", 3000).setAction("YES", v1 -> {
 //                }).show();
+
+                Intent intent = new Intent(context, DeviceControlActivity.class);
+                intent.putExtra(DEVICEADDRESS, deviceAddress);
+                context.startActivity(intent);
             }
 
             // 인텐트
-            Intent intent = new Intent(context, DeviceControlActivity.class);
-            intent.putExtra(DEVICEADDRESS, deviceAddress);
-            // flag = 1 : 1개 사용
-            // flag = 2 : 2개 사용
-            context.startActivity(intent);
+//            Intent intent = new Intent(context, DeviceControlActivity.class);
+//            intent.putExtra(DEVICEADDRESS, deviceAddress);
+//            // flag = 1 : 1개 사용
+//            // flag = 2 : 2개 사용
+//            context.startActivity(intent);
 
 //            if (AAAA.equals("")) {
 //                Log.d(TAG, "onBindViewHolder: 설정부터해");

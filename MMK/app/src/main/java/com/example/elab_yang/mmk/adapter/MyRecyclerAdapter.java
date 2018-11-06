@@ -2,7 +2,6 @@ package com.example.elab_yang.mmk.adapter;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -27,6 +26,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
     static Context mContext;
     private final List<CardItem> mDataList;
     EventBus bus;
+
     public MyRecyclerAdapter(List<CardItem> dataList) {
         mDataList = dataList;
         bus = EventBus.getDefault();
@@ -47,43 +47,39 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         CardItem item = mDataList.get(position);
 
-        RelativeLayout cardview = holder.cardview;
+        RelativeLayout layout = holder.layout;
 
         ImageView image = holder.image;
         ImageView image2 = holder.image2;
 
-        TextView text = holder.text;
-        TextView text1 = holder.text1;
-        TextView text2 = holder.text2;
-        TextView text3 = holder.text3;
-        TextView text4 = holder.text4;
-//        TextView state = holder.state;
+        TextView time = holder.time;
+        TextView kind = holder.kind;
+        TextView name = holder.name;
+        TextView unit = holder.unit;
+        TextView state = holder.state;
 
         holder.image.setImageResource(item.getImage());
-        holder.image2.setImageResource(item.getImage2());
 
-        holder.text.setText(item.getTime());
-        holder.text1.setText(item.getKind());
-        holder.text2.setText(item.getName());
-        holder.text3.setText(item.getUnit());
-        holder.text4.setText(item.getUnit());
-
-
+        holder.time.setText(item.getTime());
+//        holder.kind.setText(item.getKind());
+        holder.name.setText(item.getName());
+        holder.unit.setText(item.getUnit());
 //        holder.state.setText(item.getState());
 
+        holder.image2.setImageResource(item.getImage2());
 //        holder.speed.setText(item.getSpeed());
 //        holder.distance.setText(item.getDistance());
 //        holder.bpm.setText(item.getBpm());
 //        holder.kcal.setText(item.getKcal());
 
-        holder.cardview.setOnClickListener(v -> {
-            Toast.makeText(cardview.getContext(), "쌔게누르면 지워져", Toast.LENGTH_SHORT).show();
+        holder.layout.setOnClickListener(v -> {
+            Toast.makeText(layout.getContext(), "쌔게누르면 지워져", Toast.LENGTH_SHORT).show();
 
             bus.post(new EventCard(mDataList.get(position).getTime(), mDataList.get(position).getKind(), mDataList.get(position).getName(), mDataList.get(position).getUnit(), mDataList.get(position).getState(), position));
 
         });
 
-        holder.cardview.setOnLongClickListener(v -> {
+        holder.layout.setOnLongClickListener(v -> {
             removeAt(position);
             return false;
         });
@@ -115,31 +111,25 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        RelativeLayout cardview;
+        RelativeLayout layout;
         ImageView image, image2;
-        ImageView image3, image4;
-        TextView text, text1, text2, text3, text4;
+        TextView time, kind, name, unit, state;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            cardview = (RelativeLayout) itemView.findViewById(R.id.cardview);
-            //
-            text = (TextView) itemView.findViewById(R.id.text);
+            layout = (RelativeLayout) itemView.findViewById(R.id.layout);
             //
             image = (ImageView) itemView.findViewById(R.id.image);
             image2 = (ImageView) itemView.findViewById(R.id.image2);
-            text1 = (TextView) itemView.findViewById(R.id.text1);
-            text2 = (TextView) itemView.findViewById(R.id.text2);
-            // 중복일 경우에만 사용
-            // gone
-            image = (ImageView) itemView.findViewById(R.id.image);
-            image2 = (ImageView) itemView.findViewById(R.id.image2);
-            text3 = (TextView) itemView.findViewById(R.id.text3);
-            text4 = (TextView) itemView.findViewById(R.id.text4);
+            time = (TextView) itemView.findViewById(R.id.time);
+//            kind = (TextView) itemView.findViewById(R.id.kind);
+            name = (TextView) itemView.findViewById(R.id.name);
+            unit = (TextView) itemView.findViewById(R.id.unit);
+//            state = (TextView) itemView.findViewById(R.id.state);
             //
 
 
-            cardview.setOnClickListener(v -> {
+            layout.setOnClickListener(v -> {
                 Toast.makeText(mContext, "띠용", Toast.LENGTH_SHORT).show();
             });
             itemView.setOnClickListener(v -> {
