@@ -120,6 +120,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                Toast.makeText(getApplicationContext(),"장치 추가", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(MainActivity.this, ProfileActivity.class));
                 break;
+
             case R.id.nav_view_insulin:
                 // 인슐린 보기
 //                Toast.makeText(getApplicationContext(),"인슐린 보기", Toast.LENGTH_SHORT).show();
@@ -131,21 +132,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(getApplicationContext(), "장치 추가", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(MainActivity.this, NeedleScanActivity.class));
                 break;
+
             case R.id.nav_view_database:
                 // VIEW DATABASE
                 Toast.makeText(getApplicationContext(), "VIEW DATABASE", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(MainActivity.this, DataBaseActivity.class));
-                break;
-            case R.id.nav_setting:
-                //환경설정
-//                Toast.makeText(getApplicationContext(),"환경설정", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(MainActivity.this, SettingActivity.class));
                 break;
 
             case R.id.nav_set_insulin:
                 // 인슐린 설정
                 onCreateDialog();
                 Toast.makeText(getApplicationContext(), "인슐린 설정", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.nav_education:
+                // 유튜브 영상 페이지 설정
+                Toast.makeText(getApplicationContext(), "인슐린 설정", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this, EduYoutubeActivity.class));
+                break;
+
+            case R.id.nav_setting:
+                //환경설정
+//                Toast.makeText(getApplicationContext(),"환경설정", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this, SettingActivity.class));
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);
