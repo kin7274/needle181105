@@ -13,15 +13,4 @@
         android:scaleType="fitXY"
         android:src="@drawable/image_drawer_header" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:fontFamily="@font/my_font_family"
-        android:gravity="center_vertical|center_horizontal"
-        android:text="FOR 꾸준한 혈당관리"
-        android:textColor="@color/black"
-        android:textSize="30sp" />
-
 </RelativeLayout>
