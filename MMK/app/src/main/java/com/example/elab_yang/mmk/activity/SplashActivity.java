@@ -25,7 +25,8 @@ public class SplashActivity extends AppCompatActivity {
             finish();
         } else {
             // 디바이스부터 연결하시죠
-            Intent intent = new Intent(SplashActivity.this, DeviceScanActivity.class);
+//            Intent intent = new Intent(SplashActivity.this, DeviceScanActivity.class);
+            Intent intent = new Intent(SplashActivity.this, AppIntroVerticalActivity.class);
             startActivity(intent);
             finish();
         }

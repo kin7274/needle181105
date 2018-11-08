@@ -11,4 +11,8 @@
     <color name="white">#ffffff</color>
     <color name="black">#000</color>
     <color name="blue">#0000ff</color>
+
+    <color name="ergo_colorPrimary">#6200EE</color>
+    <color name="ergo_colorPrimaryDark">#303F9F</color>
+    <color name="ergo_colorPrimaryPurle">#3700B3</color>
 </resources>

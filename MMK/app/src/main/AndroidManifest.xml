@@ -20,13 +20,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.SplashActivity">
+        <activity android:name=".activity.AppIntroVerticalActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!--버티컬 인트로-->
+        <!--<activity-->
+        <!--android:name=".activity.AppIntroVerticalActivity"-->
+        <!--android:screenOrientation="portrait"-->
+        <!--android:theme="@style/Theme.AppCompat.Light.NoActionBar" />-->
 
         <!--메인-->
         <activity
@@ -35,24 +41,30 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <!--기본 장치 선택-->
+        <!--<activity-->
+        <!--android:name=".activity.DeviceScanActivity"-->
+        <!--android:screenOrientation="portrait"-->
+        <!--android:theme="@style/AppTheme" />-->
+
+        <!--호구조사-->
         <activity
-            android:name=".activity.DeviceScanActivity"
+            android:name=".activity.ProfileActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
-        <!--투약기 스캔 액티비티-->
+        <!--니들 스캔 액티비티-->
         <activity
             android:name=".activity.NeedleScanActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
-        <!--투약기 서비스연결 액티비티-->
+        <!--니들 서비스연결 액티비티-->
         <activity
             android:name=".activity.DeviceControlActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
-        <!--투약기 서비스 연결 액티비티-->
+        <!--니들 서비스 연결 액티비티-->
         <activity
             android:name=".activity.AutoReceiveActivity"
             android:screenOrientation="portrait"
@@ -82,9 +94,9 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
-        <!--호구조사-->
+        <!--개인정보 입력-->
         <activity
-            android:name=".activity.ProfileActivity"
+            android:name=".activity.EditProfileActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
@@ -109,6 +121,12 @@
         <!--앱 사용 가이던스 페이지-->
         <activity
             android:name=".activity.AppGuidenceActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <!--혈당강하제용-->
+        <activity
+            android:name=".activity.AlyakActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
