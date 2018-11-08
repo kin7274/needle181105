@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -183,13 +184,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     // 네비게이션메뉴 클릭 이벤트
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         int id = menuItem.getItemId();
         switch (id) {
             case R.id.nav_profile:
                 // 호구조사
 //                Toast.makeText(getApplicationContext(),"장치 추가", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                String AAAA = pref.getString("PREF_STRNAME", "");
+                if (AAAA.equals("")) {
+                    Snackbar.make(getWindow().getDecorView().getRootView(), "넌 이름이 뭐니.", 3000).setAction("확인", v -> {
+                    }).show();
+                } else {
+                    startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                }
                 break;
 
             case R.id.nav_view_insulin:
@@ -225,13 +233,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_edit_profile:
                 // 개인정보 입력
 //                Toast.makeText(getApplicationContext(), "개인정보 입력", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                startActivity(new Intent(MainActivity.this, EditProfileActivity.class));
                 break;
 
             case R.id.nav_delete_database:
                 // DATABASE + CACHE CLEAR;
                 Toast.makeText(getApplicationContext(), "DATABASE + CACHE CLEAR", Toast.LENGTH_SHORT).show();
 //                startActivity(new Intent(MainActivity.this, SettingActivity.class));
+                Intent intent = new Intent(MainActivity.this, DeleteDataBaseActivity.class);
+                startActivity(intent);
                 break;
 
             case R.id.nav_its_me:
@@ -251,28 +261,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void onCreateDialog() {
-        final String[] items = {"인슐린 1개", "인슐린 2개", "알약"};
+        final String[] items = {"인슐린 1개", "인슐린 2개", "알ㅡ약"};
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setTitle("선택해");
-        builder.setSingleChoiceItems(items, 0, (DialogInterface dialog, int which) -> {
-            Toast.makeText(MainActivity.this, items[which], Toast.LENGTH_SHORT).show();
-            if (which == 0) {
-                // 약 1개
+        builder.setTitle("선택해")
+                .setCancelable(false)
+                .setSingleChoiceItems(items, 0, (DialogInterface dialog, int which) -> {
+                    Toast.makeText(MainActivity.this, items[which], Toast.LENGTH_SHORT).show();
+                    if (which == 0) {
+                        // 약 1개
 //                    Toast.makeText(getApplicationContext(),"인슐린 1개", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(MainActivity.this, SettingInsulinActivity.class));
-            } else if (which == 1) {
-                // 약 2개
+                        startActivity(new Intent(MainActivity.this, SettingInsulinActivity.class));
+                    } else if (which == 1) {
+                        // 약 2개
 //                    Toast.makeText(getApplicationContext(),"인슐린 2개", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(MainActivity.this, TwoInsulinActivity.class));
-            } else {
-                // 알약
+                        startActivity(new Intent(MainActivity.this, TwoInsulinActivity.class));
+                    } else {
+                        // 알약
 //                    Toast.makeText(getApplicationContext(),"알약설정페이지로", Toast.LENGTH_SHORT).show();
-                Toast.makeText(getApplicationContext(), "만드는 중", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(), "만드는 중", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(MainActivity.this, AlyakActivity.class));
 //                    startActivity(new Intent(MainActivity.this, SettingInsulinActivity.class));
 
-            }
-            dialog.dismiss(); // 누르면 바로 닫히는 형태
-        })
+                    }
+                    dialog.dismiss(); // 누르면 바로 닫히는 형태
+                })
                 .show();
     }
 }

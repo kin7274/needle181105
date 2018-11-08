@@ -1,6 +1,7 @@
 package com.example.elab_yang.mmk.activity;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -19,23 +20,35 @@ public class DeleteDataBaseActivity extends AppCompatActivity {
     DB db;
     SQLiteDatabase sql;
 
+    SharedPreferences pref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deletedb);
         mContext = this;
         setStatusbar();
-        db = new DB(this);
 
+
+        db = new DB(this);
         Button btnbtn = (Button) findViewById(R.id.btnbtn);
         btnbtn.setOnClickListener(v -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
             builder.setTitle("진짜루")
                     .setMessage("저장된 내용을 전부 지울까요?")
                     .setPositiveButton("네", (dialog, which) -> {
+                        // DB삭제
                         Log.d(TAG, "onClick: db 클리어;;;");
                         sql = db.getWritableDatabase();
                         db.onUpgrade(sql, 1, 2);
+
+                        // BLE INDEX CACHE 삭제
+                        pref = getSharedPreferences("pref", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = pref.edit();
+                        editor.putInt("i_start", 0);
+                        editor.putInt("i_end", 0);
+                        editor.apply();
+
+                        finish();
                     })
                     .setNegativeButton("아니오", (dialog, which) -> Log.d(TAG, "onClick: db 휴 다행"))
                     .show()

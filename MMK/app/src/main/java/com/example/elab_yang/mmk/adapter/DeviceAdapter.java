@@ -78,7 +78,7 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
 
         String deviceName = deviceList.get(position).getDeviceName();
         String deviceAddress = deviceList.get(position).getDeviceAddress();
-//        holder.deviceNameLabel.setText(deviceList.get(position).getDeviceName());
+        holder.deviceNameLabel.setText(deviceList.get(position).getDeviceName());
         if (deviceList.get(position).getDeviceName().equals("NeedleBT")) {
             Log.d(TAG, "onBindViewHolder: 니들맞네");
             holder.deviceNameLabel.setText("니들");
@@ -209,7 +209,7 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
 
         TextView fetchActivityData;
         TextView showActivityTracks;
-        TextView deviceRemove;
+        ImageView deviceRemove;
 
         ViewHolder(View view) {
             super(view);

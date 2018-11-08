@@ -5,13 +5,12 @@
     android:layout_height="wrap_content"
     android:gravity="center_horizontal">
 
-    <android.support.v7.widget.CardView
-        android:backgroundTint="@color/weaker_yellow"
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:backgroundTint="@color/weaker_yellow"
         android:foreground="?android:attr/selectableItemBackground"
         card_view:cardCornerRadius="4dp"
         card_view:cardElevation="4dp"
@@ -27,71 +26,80 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
+                android:layout_marginTop="8dp"
                 android:fontFamily="@font/my_font_family"
                 android:gravity="center"
                 android:maxLines="1"
-                android:layout_marginTop="16dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textColor="@color/black"
                 android:textSize="30sp"
                 tools:text="device name" />
 
             <TextView
-                android:id="@+id/device_action_show_activity_tracks"
-                android:layout_height="48dp"
+                android:id="@+id/device_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/device_name"
-                android:layout_marginTop="16dp"
-                android:background="?android:attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true"
-                android:layout_width="100dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/my_font_family"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                 android:textColor="@color/black"
                 android:textSize="20sp"
-                android:fontFamily="@font/my_font_family"
-                android:gravity="center_vertical|center_horizontal"
-                android:text="서비스연결"
-                android:padding="4dp"
-                android:layout_marginLeft="4dp"
-                android:scaleType="fitXY" />
+                tools:text="device address" />
 
-            <TextView
-                android:id="@+id/device_action_fetch_activity"
-                android:layout_height="48dp"
-                android:layout_below="@id/device_name"
-                android:layout_marginTop="16dp"
-                android:layout_marginLeft="8dp"
-                android:layout_toEndOf="@id/device_action_show_activity_tracks"
-                android:background="?android:attr/selectableItemBackground"
-                android:clickable="true"
-                android:layout_width="70dp"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:fontFamily="@font/my_font_family"
-                android:gravity="center_vertical|center_horizontal"
-                android:text="동기화"
-                android:focusable="true"
-                android:padding="4dp"
-                android:scaleType="fitXY" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/device_status"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/device_action_show_activity_tracks"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_weight="1"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/my_font_family"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:padding="4dp"
+                    android:scaleType="fitXY"
+                    android:text="서비스연결"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/device_action_fetch_activity"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_toEndOf="@id/device_action_show_activity_tracks"
+                    android:layout_weight="1"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/my_font_family"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:padding="4dp"
+                    android:scaleType="fitXY"
+                    android:text="동기화"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
 
 
-            <TextView
-                android:layout_marginTop="16dp"
+            </LinearLayout>
+
+            <ImageView
                 android:id="@+id/device_info_trashcan"
-                android:layout_height="48dp"
-                android:layout_below="@id/device_name"
-                android:layout_toEndOf="@id/device_action_fetch_activity"
-                android:background="?android:attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true"
-                android:layout_width="70dp"
-                android:textColor="@color/black"
-                android:layout_marginLeft="8dp"
-                android:textSize="20sp"
-                android:fontFamily="@font/my_font_family"
-                android:gravity="center_vertical|center_horizontal"
-                android:text="삭제"
-                android:padding="2dp"
-                android:scaleType="fitXY" />
+                android:layout_width="57dp"
+                android:layout_height="49dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="4dp"
+                android:src="@drawable/ic_clear_black_24dp" />
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>

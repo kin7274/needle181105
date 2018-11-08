@@ -132,6 +132,7 @@ public class DataBaseActivity extends AppCompatActivity {
     }
 
     public int setImage(String str) {
+        // 1가지인 경우
         if (str.equals("초속효성")) {
             return R.mipmap.red;
         } else if (str.equals("속효성")) {
@@ -143,6 +144,38 @@ public class DataBaseActivity extends AppCompatActivity {
         } else if (str.equals("혼합형")) {
             return R.mipmap.blue;
         } else {
+            // 2가지인 경우
+            if (str.contains("초속효성") && str.contains("속효성")) {
+                // 초속
+                return R.mipmap.cho_sok;
+            } else if (str.contains("초속효성") && str.contains("중간성")) {
+                // 초중
+                return R.mipmap.cho_joong;
+            } else if (str.contains("초속효성") && str.contains("지속성")) {
+                // 초지
+                return R.mipmap.cho_ji;
+            } else if (str.contains("초속효성") && str.contains("혼합형")) {
+                // 초혼
+                return R.mipmap.cho_hon;
+            } else if (str.contains("속효성") && str.contains("중간성")) {
+                // 속중
+                return R.mipmap.sok_joong;
+            } else if (str.contains("속효성") && str.contains("지속성")) {
+                // 속지
+                return R.mipmap.sok_ji;
+            } else if (str.contains("속효성") && str.contains("혼합형")) {
+                // 속혼
+                return R.mipmap.sok_hon;
+            } else if (str.contains("중간성") && str.contains("지속성")) {
+                // 중지
+                return R.mipmap.joong_ji;
+            } else if (str.contains("중간성") && str.contains("혼합형")) {
+                // 중혼
+                return R.mipmap.joong_hon;
+            } else if (str.contains("지속성") && str.contains("혼합형")) {
+                // 지혼
+                return R.mipmap.ji_hon;
+            }
             return R.mipmap.ic_launcher_background;
         }
     }
