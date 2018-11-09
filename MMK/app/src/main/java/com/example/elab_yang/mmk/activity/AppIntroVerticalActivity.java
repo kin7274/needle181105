@@ -64,10 +64,6 @@ public class AppIntroVerticalActivity extends VerticalIntro {
         setSkipEnabled(true);
         setSkipText("스-킵");
         setSkipColor(R.color.black);
-
-        setVibrateEnabled(true);
-        setVibrateIntensity(60);
-
         setCustomTypeFace(Typeface.createFromAsset(getAssets(), "bmhanna_11yrs_ttf.ttf"));
     }
 
