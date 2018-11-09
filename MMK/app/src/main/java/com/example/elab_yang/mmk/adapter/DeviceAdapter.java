@@ -216,7 +216,7 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
             cardview = view.findViewById(R.id.card_view);
 
             deviceNameLabel = view.findViewById(R.id.device_name);
-//            deviceStatusLabel = view.findViewById(R.id.device_status);
+            deviceStatusLabel = view.findViewById(R.id.device_status);
             fetchActivityData = view.findViewById(R.id.device_action_fetch_activity);
             showActivityTracks = view.findViewById(R.id.device_action_show_activity_tracks);
             deviceRemove = view.findViewById(R.id.device_info_trashcan);

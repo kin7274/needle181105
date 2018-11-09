@@ -175,8 +175,9 @@ public class DataBaseActivity extends AppCompatActivity {
             } else if (str.contains("지속성") && str.contains("혼합형")) {
                 // 지혼
                 return R.mipmap.ji_hon;
+            } else {
+                return R.mipmap.ic_launcher_background;
             }
-            return R.mipmap.ic_launcher_background;
         }
     }
 

@@ -105,7 +105,7 @@ public class ReceiveDataActivity extends AppCompatActivity {
                 Log.d(TAG, "str[y] 시   = " + str[y].substring(8, 10));
                 Log.d(TAG, "str[y] 분   = " + str[y].substring(10, 12));
 
-                abc = str[y].substring(0, 4) + "-" + str[y].substring(4, 6) + "-" + str[y].substring(6, 8) + "-" + str[y].substring(8, 10) + "-" + str[y].substring(10, 12);
+                abc = str[y].substring(0, 4) + "." + str[y].substring(4, 6) + "." + str[y].substring(6, 8) + " " + str[y].substring(8, 10) + ":" + str[y].substring(10, 12);
                 //                   년도                       월                             일                             시                               분
 
                 if ((hh >= 5) && (hh < 11)) {
@@ -179,7 +179,7 @@ public class ReceiveDataActivity extends AppCompatActivity {
                             hr = morning.split("&&");
                             hrr = hr[0].split("/");
                             hrr2 = hr[1].split("/");
-                            setDB(abc, hrr[0] + "/ " + hrr2[0], hrr[1] + "/ " + hrr2[1], hrr[2] + "/ " + hrr2[2], time_now);
+                            setDB(abc, hrr[0] + "/" + hrr2[0], hrr[1] + "/" + hrr2[1], hrr[2] + "/" + hrr2[2], time_now);
 
                         } else if (morning.startsWith("&")) {
                             // true 라면 이건 &품목/품명/단위 라는거고
@@ -203,7 +203,7 @@ public class ReceiveDataActivity extends AppCompatActivity {
                             hr = afternoon.split("&&");
                             hrr = hr[0].split("/");
                             hrr2 = hr[1].split("/");
-                            setDB(abc, hrr[0] + "/ " + hrr2[0], hrr[1] + "/ " + hrr2[1], hrr[2] + "/ " + hrr2[2], time_now);
+                            setDB(abc, hrr[0] + "/" + hrr2[0], hrr[1] + "/" + hrr2[1], hrr[2] + "/" + hrr2[2], time_now);
 
                         } else if (afternoon.startsWith("&")) {
                             // true 라면 이건 &품목/품명/단위 라는거고
@@ -226,7 +226,7 @@ public class ReceiveDataActivity extends AppCompatActivity {
                             hr = dinner.split("&&");
                             hrr = hr[0].split("/");
                             hrr2 = hr[1].split("/");
-                            setDB(abc, hrr[0] + "/ " + hrr2[0], hrr[1] + "/ " + hrr2[1], hrr[2] + "/ " + hrr2[2], time_now);
+                            setDB(abc, hrr[0] + "/" + hrr2[0], hrr[1] + "/" + hrr2[1], hrr[2] + "/" + hrr2[2], time_now);
 
                         } else if (dinner.startsWith("&")) {
                             // true 라면 이건 &품목/품명/단위 라는거고
@@ -250,7 +250,7 @@ public class ReceiveDataActivity extends AppCompatActivity {
                             hr = night.split("&&");
                             hrr = hr[0].split("/");
                             hrr2 = hr[1].split("/");
-                            setDB(abc, hrr[0] + "/ " + hrr2[0], hrr[1] + "/ " + hrr2[1], hrr[2] + "/ " + hrr2[2], time_now);
+                            setDB(abc, hrr[0] + "/" + hrr2[0], hrr[1] + "/" + hrr2[1], hrr[2] + "/" + hrr2[2], time_now);
 
                         } else if (night.startsWith("&")) {
                             // true 라면 이건 &품목/품명/단위 라는거고

@@ -26,6 +26,7 @@ public class AppIntroVerticalActivity extends VerticalIntro {
         // 1페이지
         addIntroItem(new VerticalIntroItem.Builder()
                 .backgroundColor(R.color.white)
+//                .image(R.drawable.image_drawer_header)
                 .image(R.drawable.image123)
                 .title("대한민국의 어머니들")
                 .titleSize(30)
@@ -39,22 +40,23 @@ public class AppIntroVerticalActivity extends VerticalIntro {
         addIntroItem(new VerticalIntroItem.Builder()
                 .backgroundColor(R.color.ergo_colorPrimary)
                 .image(R.drawable.image_drawer_header)
+//                .image(R.drawable.image123)
                 .title("편리한 혈당기록 가능")
                 .titleSize(30)
-                .titleColor(R.color.black)
+                .titleColor(R.color.white)
                 .text("자동저장해주요")
                 .textSize(20)
-                .textColor(R.color.black)
+                .textColor(R.color.white)
                 .build());
 
         // 3페이지
         addIntroItem(new VerticalIntroItem.Builder()
                 .backgroundColor(R.color.colorAccent)
-                .image(R.drawable.ripple_bg_white)
-                .title("고맙")
+                .image(R.mipmap.stop_diabetes)
+                .title("멈춰! 당뇨야!")
                 .titleSize(30)
                 .titleColor(R.color.white)
-                .text("다 읽어줬네 ㄳ")
+                .text("꾸준한 혈당 관리를 통해 잘 관리합시다")
                 .textSize(20)
                 .textColor(R.color.white)
                 .build());
@@ -64,6 +66,7 @@ public class AppIntroVerticalActivity extends VerticalIntro {
         setSkipEnabled(true);
         setSkipText("스-킵");
         setSkipColor(R.color.black);
+        setVibrateEnabled(false);
         setCustomTypeFace(Typeface.createFromAsset(getAssets(), "bmhanna_11yrs_ttf.ttf"));
     }
 

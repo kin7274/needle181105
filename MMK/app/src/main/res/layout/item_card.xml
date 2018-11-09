@@ -10,71 +10,69 @@
         android:id="@+id/time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#78e9b7"
         android:fontFamily="@font/my_font_family"
-        android:hint="0000년 00월 00일 00시 00분"
+        android:hint="0000.00.00 00:00"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
         android:textColor="@color/black"
+        android:paddingLeft="16dp"
         android:textSize="20sp" />
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/cardview1"
+    <!--<android.support.v7.widget.CardView-->
+    <!--android:id="@+id/cardview1"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@+id/time"-->
+    <!--app:cardCornerRadius="5dp">-->
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/time"
-        app:cardCornerRadius="5dp">
+        android:background="@drawable/poo">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_margin="4dp" />
 
-            <ImageView
-                android:id="@+id/image"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_margin="4dp" />
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="83dp"
+            android:fontFamily="@font/my_font_family"
+            android:gravity="center_vertical|center_horizontal"
+            android:hint="노보래피드"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
 
-            <TextView
-                android:id="@+id/name"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="83dp"
-                android:fontFamily="@font/my_font_family"
-                android:gravity="center_vertical|center_horizontal"
-                android:hint="노보래피드"
-                android:textColor="@color/black"
-                android:textSize="30sp" />
+        <TextView
+            android:id="@+id/unit"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/name"
+            android:fontFamily="@font/my_font_family"
+            android:gravity="center_vertical|center_horizontal"
+            android:hint="00"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
 
-            <TextView
-                android:id="@+id/unit"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@+id/name"
-                android:fontFamily="@font/my_font_family"
-                android:gravity="center_vertical|center_horizontal"
-                android:hint="00"
-                android:textColor="@color/black"
-                android:textSize="30sp" />
+        <ImageView
+            android:id="@+id/image2"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="4dp" />
+    </RelativeLayout>
 
-            <ImageView
-                android:id="@+id/image2"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentTop="true"
-                android:layout_margin="4dp" />
-        </RelativeLayout>
-
-    </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/cardview1"
-        app:cardCornerRadius="5dp">
-
-    </android.support.v7.widget.CardView>
+    <!--</android.support.v7.widget.CardView>-->
 </RelativeLayout>
 
 

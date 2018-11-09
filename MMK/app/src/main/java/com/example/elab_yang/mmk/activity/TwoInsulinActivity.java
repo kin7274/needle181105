@@ -26,8 +26,8 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
     String[] set1 = {"", "", "", ""};
     String[] set2 = {"", "", "", ""};
     //
-    CardView card11, card12, card13;
-    CardView card21, card22, card23;
+    CardView card11, card12, card13, card14;
+    CardView card21, card22, card23, card24;
     //
     TextView text11, text12, text13;
     TextView text21, text22, text23;
@@ -53,6 +53,9 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
         card13 = (CardView) findViewById(R.id.card13);
         card13.setOnClickListener(this);
 
+        card14 = (CardView) findViewById(R.id.card14);
+        card14.setOnClickListener(this);
+
         card21 = (CardView) findViewById(R.id.card21);
         card21.setOnClickListener(this);
 
@@ -61,6 +64,9 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
 
         card23 = (CardView) findViewById(R.id.card23);
         card23.setOnClickListener(this);
+
+        card24 = (CardView) findViewById(R.id.card24);
+        card24.setOnClickListener(this);
 
         text11 = (TextView) findViewById(R.id.text11);
         text12 = (TextView) findViewById(R.id.text12);
@@ -76,6 +82,7 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
         checkbox22 = (CheckBox) findViewById(R.id.checkbox22);
         checkbox23 = (CheckBox) findViewById(R.id.checkbox23);
         checkbox24 = (CheckBox) findViewById(R.id.checkbox24);
+
 
 //        text11.setOnClickListener(this);
 //        text12.setOnClickListener(this);
@@ -95,6 +102,14 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onClick(View v) {
+
+        if(checkbox11.isChecked() || checkbox12.isChecked() || checkbox13.isChecked() || checkbox14.isChecked()){
+            card14.setBackgroundResource(R.color.colorAccent);
+        }
+        if(checkbox21.isChecked() || checkbox22.isChecked() || checkbox23.isChecked() || checkbox24.isChecked()){
+            card24.setBackgroundResource(R.color.colorAccent);
+        }
+
         //// 1번 설정에 관해
         // 1번 종류
         // spinner01 : 인슐린 종류(5)

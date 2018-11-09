@@ -15,7 +15,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="16dp"
-            android:text="DataBases"
+            android:fontFamily="@font/my_font_family"
+            android:text="투약 기록"
             android:textColor="#ffffff"
             android:textSize="20sp"
             android:textStyle="normal" />
@@ -28,11 +29,11 @@
     <!--android:layout_marginTop="?attr/actionBarSize" />-->
 
     <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="?attr/actionBarSize"
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="456dp"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50dp"
         android:textColor="#000"
         android:textSize="20dp" />
 
@@ -43,8 +44,10 @@
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
+        android:layout_below="@+id/recycler_view"
+        android:layout_marginTop="-52dp"
         android:fontFamily="@font/my_font_family"
-        android:text="Add Data!!"
+        android:text="수동 입력!!"
         android:textColor="@color/black"
-        android:textSize="20sp" />
+        android:textSize="30sp" />
 </RelativeLayout>
