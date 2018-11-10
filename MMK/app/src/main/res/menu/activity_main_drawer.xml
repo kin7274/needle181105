@@ -19,31 +19,30 @@
     </group>
 
     <!--메인-->
-    <item android:title="메인">
+    <item android:title="메인"
+        android:icon="@drawable/ic_storage_black_24dp" >
         <menu>
             <!--투약 설정-->
             <item
                 android:id="@+id/nav_set_insulin"
-                android:icon="@drawable/ic_add_black_24dp"
                 android:title="투약 설정" />
 
             <!--장치 추가-->
             <item
                 android:id="@+id/nav_add_device"
-                android:icon="@drawable/ic_add_black_24dp"
                 android:title="장치 추가" />
 
             <!--투약 기록 보기-->
             <item
                 android:id="@+id/nav_view_database"
-                android:icon="@drawable/ic_storage_black_24dp"
                 android:title="투약 기록 보기" />
         </menu>
     </item>
 
     <!--서브 : 참고 자료-->
-    <item android:title="참고 자료">
-        <menu>
+    <item android:title="참고 자료"
+        android:icon="@drawable/ic_settings_black_24dp">
+    <menu>
             <!--교육앱-->
             <item
                 android:id="@+id/nav_education"
@@ -53,24 +52,22 @@
     </item>
 
     <!--설정-->
-    <item android:title="환경설정">
-        <menu>
+    <item android:title="환경설정"
+        android:icon="@drawable/ic_settings_black_24dp">
+    <menu>
             <!--환경설정-->
             <item
                 android:id="@+id/nav_edit_profile"
-                android:icon="@drawable/ic_settings_black_24dp"
                 android:title="개인정보 설정" />
 
             <!--모든 기록 삭제-->
             <item
                 android:id="@+id/nav_delete_database"
-                android:icon="@drawable/ic_settings_black_24dp"
                 android:title="모든 기록 삭제" />
 
             <!--개발자 정보-->
             <item
                 android:id="@+id/nav_its_me"
-                android:icon="@drawable/ic_settings_black_24dp"
                 android:title="개발자 정보" />
         </menu>
     </item>

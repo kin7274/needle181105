@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ArrayList<Device> deviceArrayList;
     //    ImageView big_size_image;
     private Handler mHandler;
-    // 처음 클리어 플래그
-    Boolean first_clear_flag = false;
+//     처음 클리어 플래그
+//    Boolean first_clear_flag = false;
     AlertDialog alert;
 
     @Override
@@ -85,8 +85,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void check_first() {
         pref = getSharedPreferences("ActivityPREF", Context.MODE_PRIVATE);
         // 너는 처음이구나
-        if (pref.getBoolean("first_or_second", false)) {
+        if (pref.getBoolean("first_or_second", true)) {
             Log.d(TAG, "check_first: 응 나 처음이야");
+            Log.d(TAG, "check_first: " + false);
             // 사용법 확인하실?
             // 혹시.. 처음이라면.. 가이드를 해주자
             hoxy_first();
@@ -101,6 +102,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mHandler.postDelayed(() -> {
                 try {
                     showDialog();
+                    check_exec();
+//                    SharedPreferences.Editor editor = pref.edit();
+//                    editor.putBoolean("first_or_second", false);
+//                    editor.apply();
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -108,6 +114,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
+    private void check_exec(){
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putBoolean("first_or_second", false);
+        editor.apply();
+    }
     // 사용법을 알려드리까요?
     public void showDialog() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(mContext)

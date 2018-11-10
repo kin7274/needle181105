@@ -98,7 +98,7 @@ public class AppIntroVerticalActivity extends VerticalIntro {
     @Override
     protected void onDonePressed() {
         // first_or_second = true;
-        check_exec();
+//        check_exec();
         // 전환
         startActivity(new Intent(this, MainActivity.class));
         Log.d(TAG, "onDonePressed: AppIntroVerticalActivity -> MainActivity");
@@ -117,10 +117,10 @@ public class AppIntroVerticalActivity extends VerticalIntro {
     }
 
     // 실행
-    private void check_exec() {
-        SharedPreferences.Editor editor = pref.edit();
-        editor.putBoolean("first_or_second", true);
-        editor.apply();
-    }
+//    private void check_exec() {
+//        SharedPreferences.Editor editor = pref.edit();
+//        editor.putBoolean("first_or_second", false);
+//        editor.apply();
+//    }
 }
 
