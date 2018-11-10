@@ -35,13 +35,13 @@
             </android.support.v7.widget.Toolbar>
 
             <RelativeLayout
-                android:layout_marginTop="?attr/actionBarSize"
                 android:id="@+id/aaa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="4dp"
+                android:layout_marginBottom="4dp"
                 android:layout_marginLeft="4dp"
-                android:layout_marginBottom="4dp">
+                android:layout_marginRight="4dp"
+                android:layout_marginTop="?attr/actionBarSize">
 
                 <android.support.v7.widget.CardView
                     android:id="@+id/card11"
@@ -182,10 +182,10 @@
                             android:id="@+id/text14"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginRight="8dp"
                             android:layout_marginBottom="8dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            android:layout_marginTop="16dp"
                             android:fontFamily="@font/my_font_family"
                             android:gravity="center_vertical|center_horizontal"
                             android:text="투약 시간을 선택해주세요"
@@ -193,6 +193,7 @@
                             android:textSize="30sp" />
 
                         <LinearLayout
+                            android:id="@+id/checkboxgroup1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/text14"
@@ -248,11 +249,11 @@
             <View
                 android:id="@+id/bbb"
                 android:layout_width="match_parent"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="30dp"
                 android:layout_height="3dp"
                 android:layout_below="@+id/aaa"
                 android:layout_margin="4dp"
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="30dp"
                 android:background="@color/black" />
 
             <RelativeLayout
@@ -400,10 +401,10 @@
                             android:id="@+id/text24"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginRight="8dp"
                             android:layout_marginBottom="8dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            android:layout_marginTop="16dp"
                             android:fontFamily="@font/my_font_family"
                             android:gravity="center_vertical|center_horizontal"
                             android:text="투약 시간을 선택해주세요"
@@ -411,7 +412,7 @@
                             android:textSize="30sp" />
 
                         <LinearLayout
-                            android:id="@+id/ccc"
+                            android:id="@+id/checkboxgroup2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/text24"
@@ -461,14 +462,14 @@
                         </LinearLayout>
 
                         <Button
-                            android:background="@drawable/round_button"
-                            android:layout_below="@+id/ccc"
                             android:id="@+id/set_btn"
                             style="?attr/borderlessButtonStyle"
-                            android:layout_marginLeft="100dp"
-                            android:layout_marginRight="100dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_below="@+id/ccc"
+                            android:layout_marginLeft="100dp"
+                            android:layout_marginRight="100dp"
+                            android:background="@drawable/round_button"
                             android:fontFamily="@font/my_font_family"
                             android:text="저장하기"
                             android:textColor="@color/blue"

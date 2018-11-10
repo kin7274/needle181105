@@ -4,6 +4,7 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/text_dasihanbun"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
@@ -13,7 +14,7 @@
         android:fontFamily="@font/my_font_family"
         android:gravity="center_vertical|center_horizontal"
         android:text="다시한번생각하고왕"
-        android:textColor="@color/black"
+        android:textColor="@color/red"
         android:textSize="30sp" />
 
     <Button
@@ -21,10 +22,10 @@
         style="?attr/borderlessButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
         android:fontFamily="@font/my_font_family"
         android:text="삭제하겠습니다."
-        android:textColor="@color/black"
+        android:textColor="@color/red"
         android:textSize="20sp" />
 </RelativeLayout>

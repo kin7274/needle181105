@@ -1,4 +1,4 @@
-package com.example.elab_yang.mmk.activity;
+package com.example.elab_yang.mmk.activity.navi;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;

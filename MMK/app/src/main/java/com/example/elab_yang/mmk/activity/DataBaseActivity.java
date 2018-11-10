@@ -1,7 +1,6 @@
 package com.example.elab_yang.mmk.activity;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -15,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -30,84 +28,52 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
-import java.util.Dictionary;
 import java.util.List;
 
-public class DataBaseActivity extends AppCompatActivity {
+public class DataBaseActivity extends AppCompatActivity implements View.OnClickListener {
     private final static String TAG = DataBaseActivity.class.getSimpleName();
     Context mContext;
     //    FrameLayout frameLayout;
+    // 데이터가 있을 시 : 리사이클러뷰
     RelativeLayout data_exist_layout;
+    // 데이터가 없을 시 : 이미지+텍스트뷰
     RelativeLayout data_0_layout;
     DB db;
     SQLiteDatabase sql;
+
+    List<CardItem> lists;
+    private MyRecyclerAdapter mAdapter;
+    RecyclerView recycler_view;
 
     Button add_btn;
 
     String data;
     //    String abc[] = {"", "", "", "", "", "", ""};
-    List<CardItem> lists;
-    private MyRecyclerAdapter mAdapter;
-    RecyclerView recycler_view;
-
-    ImageView image_question;
-
     EventBus bus = EventBus.getDefault();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_db);
-        bus.register(this);
         mContext = this;
+        bus.register(this);
+        set();
         setRecyclerView();
 
+    }
+
+    public void set() {
         data_exist_layout = (RelativeLayout) findViewById(R.id.data_exist_layout);
         data_0_layout = (RelativeLayout) findViewById(R.id.data_0_layout);
-
-        image_question = (ImageView) findViewById(R.id.image_question);
-
 //        frameLayout = (FrameLayout) findViewById(R.id.frameLayout);
 
+        // 추가 버튼
         add_btn = (Button) findViewById(R.id.add_btn);
-        add_btn.setOnClickListener(v -> {
+        add_btn.setOnClickListener(this);
 //            selectDialog();
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            View view = LayoutInflater.from(DataBaseActivity.this)
-                    .inflate(R.layout.edit_box, null, false);
-            builder.setView(view);
-
-            final Button ButtonSubmit = (Button) view.findViewById(R.id.button_dialog_submit);
-            final EditText edit1 = (EditText) view.findViewById(R.id.edit1);
-            final EditText edit2 = (EditText) view.findViewById(R.id.edit2);
-            final EditText edit3 = (EditText) view.findViewById(R.id.edit3);
-            final EditText edit4 = (EditText) view.findViewById(R.id.edit4);
-            final EditText edit5 = (EditText) view.findViewById(R.id.edit5);
-            ButtonSubmit.setText("삽입");
-            final AlertDialog dialog = builder.create();
-            ButtonSubmit.setOnClickListener(v1 -> {
-                String strEdit1 = edit1.getText().toString();
-                String strEdit2 = edit2.getText().toString();
-                String strEdit3 = edit3.getText().toString();
-                String strEdit4 = edit3.getText().toString();
-                String strEdit5 = edit3.getText().toString();
-                // 디뽈트값
-                lists.add(new CardItem(setImage(strEdit1), strEdit1, strEdit2, strEdit3, strEdit4, strEdit5, setImage2(strEdit5)));
-                if(lists.size() == 1){
-                    data_exist_layout.setVisibility(View.VISIBLE);
-                    data_0_layout.setVisibility(View.GONE);
-                }
-                mAdapter.notifyDataSetChanged();
-                dialog.dismiss();
-            });
-            dialog.show();
-        });
-        db = new DB(this);
-        getDB();
     }
 
     public void setRecyclerView() {
-        // 객체 생성
         recycler_view = (RecyclerView) findViewById(R.id.recycler_view);
 
 //        image_question.setVisibility(frameLayout.GONE);
@@ -125,14 +91,24 @@ public class DataBaseActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        // 데이터가 이싸뇽?
+        if (lists.size() > 0) {
+            Log.d(TAG, "setRecyclerView: 있어요");
+            data_exist_layout.setVisibility(View.VISIBLE);
+            data_0_layout.setVisibility(View.GONE);
+        } else {
+            Log.d(TAG, "setRecyclerView: 없엉ㅅ");
+            data_exist_layout.setVisibility(View.GONE);
+            data_0_layout.setVisibility(View.VISIBLE);
+        }
         mAdapter = new MyRecyclerAdapter(lists);
 //        mAdapter.setOnClickListener((MyRecyclerAdapter.MyRecyclerViewClickListener) this);
         recycler_view.setAdapter(mAdapter);
     }
 
+
     public void getDB() {
         sql = db.getReadableDatabase();
-
         // 화면 clear
         data = "";
         Cursor cursor;
@@ -149,21 +125,13 @@ public class DataBaseActivity extends AppCompatActivity {
             Log.d(TAG, "약값은 " + cursor.getString(2));
             lists.add(new CardItem(setImage(cursor.getString(2)), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), setImage2(cursor.getString(5))));
         }
-        if (data.equals("")) {
-            // 데이터 없는거고
-            data_exist_layout.setVisibility(View.GONE);
-            data_0_layout.setVisibility(View.VISIBLE);
-        } else {
-            data_exist_layout.setVisibility(View.VISIBLE);
-            data_0_layout.setVisibility(View.GONE);
-            mAdapter.notifyDataSetChanged();
-            cursor.close();
-            sql.close();
-            Toast.makeText(getApplicationContext(), "조회하였습니다.", Toast.LENGTH_SHORT).show();
-        }
-
+        mAdapter.notifyDataSetChanged();
+        cursor.close();
+        sql.close();
+        Toast.makeText(getApplicationContext(), "조회하였습니다.", Toast.LENGTH_SHORT).show();
     }
 
+    // 앞에 이미지를 선택하자
     public int setImage(String str) {
         // 1가지인 경우
         if (str.equals("초속효성")) {
@@ -177,42 +145,43 @@ public class DataBaseActivity extends AppCompatActivity {
         } else if (str.equals("혼합형")) {
             return R.mipmap.blue;
         }
-// 2가지인 경우
+        // 2가지인 경우
         else if (str.contains("초속효성") && str.contains("속효성")) {
-                // 초속
-                return R.mipmap.cho_sok;
-            } else if (str.contains("초속효성") && str.contains("중간형")) {
-                // 초중
-                return R.mipmap.cho_joong;
-            } else if (str.contains("초속효성") && str.contains("지속성")) {
-                // 초지
-                return R.mipmap.cho_ji;
-            } else if (str.contains("초속효성") && str.contains("혼합형")) {
-                // 초혼
-                return R.mipmap.cho_hon;
-            } else if (str.contains("속효성") && str.contains("중간형")) {
-                // 속중
-                return R.mipmap.sok_joong;
-            } else if (str.contains("속효성") && str.contains("지속성")) {
-                // 속지
-                return R.mipmap.sok_ji;
-            } else if (str.contains("속효성") && str.contains("혼합형")) {
-                // 속혼
-                return R.mipmap.sok_hon;
-            } else if (str.contains("중간형") && str.contains("지속성")) {
-                // 중지
-                return R.mipmap.joong_ji;
-            } else if (str.contains("중간형") && str.contains("혼합형")) {
-                // 중혼
-                return R.mipmap.joong_hon;
-            } else if (str.contains("지속성") && str.contains("혼합형")) {
-                // 지혼
-                return R.mipmap.ji_hon;
-            } else {
-                return R.mipmap.ic_launcher_background;
-            }
+            // 초속
+            return R.mipmap.cho_sok;
+        } else if (str.contains("초속효성") && str.contains("중간형")) {
+            // 초중
+            return R.mipmap.cho_joong;
+        } else if (str.contains("초속효성") && str.contains("지속성")) {
+            // 초지
+            return R.mipmap.cho_ji;
+        } else if (str.contains("초속효성") && str.contains("혼합형")) {
+            // 초혼
+            return R.mipmap.cho_hon;
+        } else if (str.contains("속효성") && str.contains("중간형")) {
+            // 속중
+            return R.mipmap.sok_joong;
+        } else if (str.contains("속효성") && str.contains("지속성")) {
+            // 속지
+            return R.mipmap.sok_ji;
+        } else if (str.contains("속효성") && str.contains("혼합형")) {
+            // 속혼
+            return R.mipmap.sok_hon;
+        } else if (str.contains("중간형") && str.contains("지속성")) {
+            // 중지
+            return R.mipmap.joong_ji;
+        } else if (str.contains("중간형") && str.contains("혼합형")) {
+            // 중혼
+            return R.mipmap.joong_hon;
+        } else if (str.contains("지속성") && str.contains("혼합형")) {
+            // 지혼
+            return R.mipmap.ji_hon;
+        } else {
+            return R.mipmap.ic_launcher_background;
         }
+    }
 
+    // 뒤에 이미지를 선택하자
     public int setImage2(String str) {
         if (str.equals("아침식전")) {
             return R.mipmap.red1;
@@ -227,9 +196,9 @@ public class DataBaseActivity extends AppCompatActivity {
         }
     }
 
+    // db에 저장
     public void set_setDB() {
         int cnt = lists.size();
-
         //        Toast.makeText(getApplicationContext(), "cnt = " + cnt, Toast.LENGTH_SHORT).show();
         sql = db.getWritableDatabase();
         db.onUpgrade(sql, 1, 2);
@@ -241,7 +210,6 @@ public class DataBaseActivity extends AppCompatActivity {
 //            Log.d(TAG, i + " = " + lists.get(i).getBpm());
 //            Log.d(TAG, i + " = " + lists.get(i).getKcal());
             setDB(lists.get(i).getTime(), lists.get(i).getKind(), lists.get(i).getName(), lists.get(i).getUnit(), lists.get(i).getState());
-
         }
     }
 
@@ -252,13 +220,14 @@ public class DataBaseActivity extends AppCompatActivity {
         sql.close();
     }
 
+    // 뒤로가기
     @Override
     public void onBackPressed() {
         Toast.makeText(getApplicationContext(), "뒤로가기버튼 누름", Toast.LENGTH_SHORT).show();
         showDialog("골라", "저장할까?");
     }
 
-
+    // 뒤로가기 - 다이얼로그
     public void showDialog(String title, String context) {
         android.app.AlertDialog.Builder dialog = new android.app.AlertDialog.Builder(this);
         dialog.setTitle(title)
@@ -286,16 +255,14 @@ public class DataBaseActivity extends AppCompatActivity {
     public void onStop() {
         bus.unregister(this);
         super.onStop();
-
     }
 
     @Subscribe
     public void getEventFromAdapter(EventCard event) {
-
         Log.e(TAG, "getEventFromAdapter: " + event.getKind() + event.getName() + event.getTime() + event.getPosistion());
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        View view = LayoutInflater.from(DataBaseActivity.this).inflate(R.layout.edit_box, null, false);
+        View view = LayoutInflater.from(DataBaseActivity.this).inflate(R.layout.db_refresh_edit_box, null, false);
         builder.setView(view);
         final Button ButtonSubmit = (Button) view.findViewById(R.id.button_dialog_submit);
         final EditText edit1 = (EditText) view.findViewById(R.id.edit1);
@@ -311,16 +278,58 @@ public class DataBaseActivity extends AppCompatActivity {
             String strEdit3 = edit3.getText().toString();
             String strEdit4 = edit4.getText().toString();
             String strEdit5 = edit5.getText().toString();
-
             // 디뽈트값
 //            lists.set(event.getPosistion(), new CardItem(setImage(""), null, null, null, null, null, setImage2("")));
             lists.set(event.getPosistion(), new CardItem(setImage(strEdit1), strEdit1, strEdit2, strEdit3, strEdit4, strEdit5, setImage2(strEdit5)));
-
             mAdapter.notifyDataSetChanged();
             dialog.dismiss();
         });
+        dialog.show();
+    }
 
+    @Override
+    public void onClick(View v) {
+        // 추가 버튼 클릭시
+        // TODO: 2018-11-10 입력 양식 정해주기
+        if (v.getId() == R.id.add_btn) {
+            showdialog_add();
 
+            // 디비를 가져와
+            db = new DB(this);
+            getDB();
+        }
+    }
+
+    private void showdialog_add() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View view = LayoutInflater.from(DataBaseActivity.this)
+                .inflate(R.layout.db_add_edit_box, null, false);
+        builder.setView(view);
+
+        final Button ButtonSubmit = (Button) view.findViewById(R.id.button_dialog_submit);
+        final EditText edit1 = (EditText) view.findViewById(R.id.edit1);
+        final EditText edit2 = (EditText) view.findViewById(R.id.edit2);
+        final EditText edit3 = (EditText) view.findViewById(R.id.edit3);
+        final EditText edit4 = (EditText) view.findViewById(R.id.edit4);
+        final EditText edit5 = (EditText) view.findViewById(R.id.edit5);
+        ButtonSubmit.setText("삽입");
+        final AlertDialog dialog = builder.create();
+        ButtonSubmit.setOnClickListener(v1 -> {
+            String strEdit1 = edit1.getText().toString();
+            String strEdit2 = edit2.getText().toString();
+            String strEdit3 = edit3.getText().toString();
+            String strEdit4 = edit4.getText().toString();
+            String strEdit5 = edit5.getText().toString();
+            // 임시로 default
+            lists.add(new CardItem(setImage(strEdit1), strEdit1, strEdit2, strEdit3, strEdit4, strEdit5, setImage2(strEdit5)));
+            // 내가 추가한게 처음이야? 그럼 뷰를 바꿔야지
+            if (lists.size() == 1) {
+                data_exist_layout.setVisibility(View.VISIBLE);
+                data_0_layout.setVisibility(View.GONE);
+            }
+            mAdapter.notifyDataSetChanged();
+            dialog.dismiss();
+        });
         dialog.show();
     }
 }

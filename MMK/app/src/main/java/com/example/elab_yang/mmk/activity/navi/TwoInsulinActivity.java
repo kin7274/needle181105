@@ -1,4 +1,4 @@
-package com.example.elab_yang.mmk.activity;
+package com.example.elab_yang.mmk.activity.navi;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -102,12 +102,11 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onClick(View v) {
-
-        if(checkbox11.isChecked() || checkbox12.isChecked() || checkbox13.isChecked() || checkbox14.isChecked()){
-            card14.setBackgroundResource(R.color.colorAccent);
+        if (checkbox11.isChecked() || checkbox12.isChecked() || checkbox13.isChecked() || checkbox14.isChecked()) {
+            card14.setBackgroundResource(R.color.lime);
         }
-        if(checkbox21.isChecked() || checkbox22.isChecked() || checkbox23.isChecked() || checkbox24.isChecked()){
-            card24.setBackgroundResource(R.color.colorAccent);
+        if (checkbox21.isChecked() || checkbox22.isChecked() || checkbox23.isChecked() || checkbox24.isChecked()) {
+            card24.setBackgroundResource(R.color.lime);
         }
 
         //// 1번 설정에 관해
@@ -133,8 +132,8 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
         final String[] items999;
         // 스위치문
         switch (v.getId()) {
+            // 품목
             case R.id.card11:
-                // 품목
                 ArrayAdapter<String> adapter11 = new ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice, items);
                 adapter11.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
                 // 리스트 목록 클릭 이벤트
@@ -146,11 +145,12 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
                             set1[0] = items[position];
                             // 메인 텍스트에 값 넣음
                             text11.setText(items[position]);
-                            card11.setBackgroundResource(R.color.colorAccent);
+                            card11.setBackgroundResource(R.color.lime);
                         });
                 builder11.create();
                 builder11.show();
                 break;
+
             case R.id.card12:
                 // 하위품목
                 String mykinds = set1[0];
@@ -175,11 +175,12 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
 //                                Toast.makeText(getApplicationContext(), "선택한 값 : " + items99[position], Toast.LENGTH_SHORT).show();
                             set1[1] = items99[position];
                             text12.setText(items99[position]);
-                            card12.setBackgroundResource(R.color.colorAccent);
+                            card12.setBackgroundResource(R.color.lime);
                         });
                 builder12.create();
                 builder12.show();
                 break;
+
             case R.id.card13:
                 // 단위
                 final EditText et = new EditText(this);
@@ -192,7 +193,7 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
 //                                if (Pattern.matches("^[0-9]+$", settingdata1[2])) {
                             // 숫자인 경우
                             text13.setText(et.getText().toString());
-                            card13.setBackgroundResource(R.color.colorAccent);
+                            card13.setBackgroundResource(R.color.lime);
 //                                } else {
                             // 숫자가 아니네?
 //                                    Toast.makeText(getApplicationContext(), "숫자만 입력해주세요", Toast.LENGTH_SHORT).show();
@@ -217,6 +218,8 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
 //                builder14.create();
 //                builder14.show();
 //                break;
+
+
             // 이제 2번째 약 설정
             case R.id.card21:
                 // 품목
@@ -231,11 +234,12 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
                             set2[0] = items[position];
                             // 메인 텍스트에 값 넣음
                             text21.setText(items[position]);
-                            card21.setBackgroundResource(R.color.colorAccent);
+                            card21.setBackgroundResource(R.color.lime);
                         });
                 builder21.create();
                 builder21.show();
                 break;
+
             case R.id.card22:
                 // 하위품목
                 String mykinds2 = set2[0];
@@ -260,11 +264,12 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
 //                                Toast.makeText(getApplicationContext(), "선택한 값 : " + items99[position], Toast.LENGTH_SHORT).show();
                             set2[1] = items999[position];
                             text22.setText(items999[position]);
-                            card22.setBackgroundResource(R.color.colorAccent);
+                            card22.setBackgroundResource(R.color.lime);
                         });
                 builder22.create();
                 builder22.show();
                 break;
+
             case R.id.card23:
                 // 단위
                 final EditText et2 = new EditText(this);
@@ -277,7 +282,7 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
 //                                if (Pattern.matches("^[0-9]+$", settingdata1[2])) {
                             // 숫자인 경우
                             text23.setText(et2.getText().toString());
-                            card23.setBackgroundResource(R.color.colorAccent);
+                            card23.setBackgroundResource(R.color.lime);
 //                                } else {
                             // 숫자가 아니네?
 //                                    Toast.makeText(getApplicationContext(), "숫자만 입력해주세요", Toast.LENGTH_SHORT).show();
@@ -302,8 +307,9 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
 //                builder24.create();
 //                builder24.show();
 //                break;
+
+            // 저장
             case R.id.set_btn:
-                // 저장
                 String result = "";
                 if (checkbox11.isChecked()) result += checkbox11.getText().toString();
                 if (checkbox12.isChecked()) result += checkbox12.getText().toString();

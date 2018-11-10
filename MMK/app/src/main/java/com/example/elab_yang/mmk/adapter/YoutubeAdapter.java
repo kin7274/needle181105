@@ -1,4 +1,4 @@
-package com.example.elab_yang.mmk.activity;
+package com.example.elab_yang.mmk.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.elab_yang.mmk.R;
+import com.example.elab_yang.mmk.model.YoutubeItem;
 
 import java.util.List;
 

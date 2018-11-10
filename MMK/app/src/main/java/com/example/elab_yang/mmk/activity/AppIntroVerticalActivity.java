@@ -19,21 +19,15 @@ public class AppIntroVerticalActivity extends VerticalIntro {
     @Override
     protected void onStart() {
         super.onStart();
-
-        pref = getSharedPreferences("ActivityPREF", Context.MODE_PRIVATE);
-        if(pref.getBoolean("first_or_second", false)){
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-            finish();
-        }
+        // 처음이 아니네?
+        check_first();
     }
-
 
 
     @Override
     protected void init() {
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        // 상태바 제거
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         // 1페이지
         addIntroItem(new VerticalIntroItem.Builder()
@@ -82,31 +76,51 @@ public class AppIntroVerticalActivity extends VerticalIntro {
         setCustomTypeFace(Typeface.createFromAsset(getAssets(), "bmhanna_11yrs_ttf.ttf"));
     }
 
+    // 3페이지 버튼(최종 버튼)
     @Override
     protected Integer setLastItemBottomViewColor() {
         return R.color.colorAccent;
     }
 
+    // 스맵버튼
     @Override
     protected void onSkipPressed(View view) {
         Log.d(TAG, "onSkipPressed: 스키이이입입입입!!");
     }
 
+    // 페이지 넘어갈 때
     @Override
     protected void onFragmentChanged(int position) {
         Log.d(TAG, "onFragmentChanged: 변경 : position" + position);
     }
 
+    // 미지막 버튼 클릭시
     @Override
     protected void onDonePressed() {
+        // first_or_second = true;
+        check_exec();
+        // 전환
+        startActivity(new Intent(this, MainActivity.class));
+        Log.d(TAG, "onDonePressed: AppIntroVerticalActivity -> MainActivity");
+        finish();
+    }
 
+    // 처음 사용자인가?
+    private void check_first() {
+        pref = getSharedPreferences("ActivityPREF", Context.MODE_PRIVATE);
+        if (pref.getBoolean("first_or_second", false)) {
+            Log.d(TAG, "check_first: 응 나 처음이야");
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
+
+    // 실행
+    private void check_exec() {
         SharedPreferences.Editor editor = pref.edit();
         editor.putBoolean("first_or_second", true);
         editor.apply();
-
-        
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        finish();
     }
 }
+

@@ -1,15 +1,13 @@
-package com.example.elab_yang.mmk.activity;
+package com.example.elab_yang.mmk.activity.navi;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.elab_yang.mmk.R;
 
@@ -55,8 +53,8 @@ public class ViewInsulinActivity extends AppCompatActivity {
         String a5 = "";
         String A5 = pref.getString("cache_data_4", a5);
         text5.setText(A5);
-
     }
+
     public void setToolbar() {
         Toolbar mytoolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(mytoolbar);
@@ -69,5 +67,4 @@ public class ViewInsulinActivity extends AppCompatActivity {
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
     }
-
 }

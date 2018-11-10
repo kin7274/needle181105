@@ -48,7 +48,7 @@
 
         <!--호구조사-->
         <activity
-            android:name=".activity.ProfileActivity"
+            android:name=".activity.navi.ProfileActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
@@ -78,25 +78,25 @@
 
         <!--VIEW INSULIN-->
         <activity
-            android:name=".activity.ViewInsulinActivity"
+            android:name=".activity.navi.ViewInsulinActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
         <!--사용 인슐린 설정 액티비티-->
         <activity
-            android:name=".activity.SettingInsulinActivity"
+            android:name=".activity.navi.SettingInsulinActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
         <!--2개의 인슐린 사용자 설정 액티비티-->
         <activity
-            android:name=".activity.TwoInsulinActivity"
+            android:name=".activity.navi.TwoInsulinActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
         <!--개인정보 입력-->
         <activity
-            android:name=".activity.EditProfileActivity"
+            android:name=".activity.navi.EditProfileActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
@@ -114,13 +114,13 @@
 
         <!--유튜브 영상 페이지-->
         <activity
-            android:name=".activity.EduYoutubeActivity"
+            android:name=".activity.navi.EduYoutubeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
         <!--앱 사용 가이던스 페이지-->
         <activity
-            android:name=".activity.AppGuidenceActivity"
+            android:name=".activity.navi.AppGuidenceActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 

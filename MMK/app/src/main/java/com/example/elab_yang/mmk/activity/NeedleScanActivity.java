@@ -40,7 +40,7 @@ public class NeedleScanActivity extends AppCompatActivity {
     private static final String TAG = "DeviceScanActivity";
     private static final int PERMISSION_REQUEST_COARSE_LOCATION = 1000;
     private static final int REQUEST_ENABLE_BT = 1;
-    private static final long SCAN_PERIOD = 10000; // Stops scanning after 10 seconds.
+    private static final long SCAN_PERIOD = 10000;
 
     RecyclerView recyclerView;
     NeedleScanAdapter adapter;
@@ -56,26 +56,28 @@ public class NeedleScanActivity extends AppCompatActivity {
 
     boolean mScanning;
 
-    SharedPreferences preferences;
+    SharedPreferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_needle_scan);
         setStatusbar();
-        preferences = getSharedPreferences("ActivityPREF", Context.MODE_PRIVATE);
+        pref = getSharedPreferences("ActivityPREF", Context.MODE_PRIVATE);
         bleDeviceList = new ArrayList<>();
         handler = new Handler();
-
+        // 확인 4종 세트
         checkScanPermission();
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setHasFixedSize(true);
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         checkBleSupport();
         getBluetoothAdapter();
         checkBluetoothSupport();
-        //
+        // 리사이클러뷰
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setHasFixedSize(true);
+        // 구분선
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+
         button = (Button) findViewById(R.id.button);
         button.setOnClickListener(v -> {
             if (!mScanning) {
@@ -97,7 +99,7 @@ public class NeedleScanActivity extends AppCompatActivity {
         window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
     }
 
-
+    // 확인 4종세트
     private void checkBleSupport() {
         if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
             Toast.makeText(this, "x", Toast.LENGTH_SHORT).show();

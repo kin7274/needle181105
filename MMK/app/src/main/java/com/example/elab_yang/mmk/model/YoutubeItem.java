@@ -1,4 +1,4 @@
-package com.example.elab_yang.mmk.activity;
+package com.example.elab_yang.mmk.model;
 
 // 영상 아이템
 public class YoutubeItem {

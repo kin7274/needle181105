@@ -1,4 +1,4 @@
-package com.example.elab_yang.mmk.activity;
+package com.example.elab_yang.mmk.activity.navi;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -19,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +30,7 @@ public class SettingInsulinActivity extends AppCompatActivity implements View.On
     Context mContext;
     // 설정한 1번 약
     String[] set = {"", "", "", ""};
-    CardView card1, card2, card3;
+    CardView card1, card2, card3, card4;
     TextView text1, text2, text3;
     //    Boolean insulin_flag = true;
     CheckBox checkbox1, checkbox2, checkbox3, checkbox4;
@@ -67,6 +68,8 @@ public class SettingInsulinActivity extends AppCompatActivity implements View.On
         card3 = (CardView) findViewById(R.id.card3);
         card3.setOnClickListener(this);
 
+        card4 = (CardView) findViewById(R.id.card4);
+        card4.setOnClickListener(this);
         // 상위품목
         text1 = (TextView) findViewById(R.id.text1);
 //        text1.setOnClickListener(this);
@@ -81,11 +84,8 @@ public class SettingInsulinActivity extends AppCompatActivity implements View.On
 //        text4.setOnClickListener(this);
 
         checkbox1 = (CheckBox) findViewById(R.id.checkbox1);
-
         checkbox2 = (CheckBox) findViewById(R.id.checkbox2);
-
         checkbox3 = (CheckBox) findViewById(R.id.checkbox3);
-
         checkbox4 = (CheckBox) findViewById(R.id.checkbox4);
 
         // 저-장
@@ -106,8 +106,6 @@ public class SettingInsulinActivity extends AppCompatActivity implements View.On
 
     @Override
     public void onClick(View v) {
-        //// 1번 설정에 관해
-        // 1번 종류
         // spinner01 : 인슐린 종류(5)
         final String[] items = {getResources().getString(R.string.insulin_name), getResources().getString(R.string.insulin_name1), getResources().getString(R.string.insulin_name2), getResources().getString(R.string.insulin_name3), getResources().getString(R.string.insulin_name4)};
         // spinner02 : 하위 품목
@@ -126,6 +124,11 @@ public class SettingInsulinActivity extends AppCompatActivity implements View.On
         // 임시사용
         final String[] items99;
         //////////////
+
+        if (checkbox1.isChecked() || checkbox2.isChecked() || checkbox3.isChecked() || checkbox4.isChecked()) {
+            card4.setBackgroundResource(R.color.lime);
+        }
+
         // 스위치문
         switch (v.getId()) {
             case R.id.card1:
@@ -141,11 +144,12 @@ public class SettingInsulinActivity extends AppCompatActivity implements View.On
                             set[0] = items[position];
                             // 메인 텍스트에 값 넣음
                             text1.setText(items[position]);
-                            card1.setBackgroundResource(R.color.colorAccent);
+                            card1.setBackgroundResource(R.color.lime);
                         });
                 builder11.create();
                 builder11.show();
                 break;
+
             case R.id.card2:
                 // 하위품목
                 String mykinds = set[0];
@@ -170,16 +174,19 @@ public class SettingInsulinActivity extends AppCompatActivity implements View.On
 //                                Toast.makeText(getApplicationContext(), "선택한 값 : " + items99[position], Toast.LENGTH_SHORT).show();
                             set[1] = items99[position];
                             text2.setText(items99[position]);
-                            card2.setBackgroundResource(R.color.colorAccent);
+                            card2.setBackgroundResource(R.color.lime);
                         });
                 builder12.create();
                 builder12.show();
                 break;
+
             case R.id.card3:
                 // 단위
                 final EditText et = new EditText(this);
                 AlertDialog.Builder builder13 = new AlertDialog.Builder(this)
                         // 숫자만 입력가능하도록, 키패드를 띄울까?
+                        // TODO: 2018-11-10 키패드를 띄울까
+                        // TODO: 2018-11-10 숫자만 입력가능하도록
                         .setTitle("단위")
                         .setPositiveButton("확인", (dialog, position) -> {
                             set[2] = et.getText().toString();
@@ -187,7 +194,7 @@ public class SettingInsulinActivity extends AppCompatActivity implements View.On
 //                                if (Pattern.matches("^[0-9]+$", settingdata1[2])) {
                             // 숫자인 경우
                             text3.setText(et.getText().toString());
-                            card3.setBackgroundResource(R.color.colorAccent);
+                            card3.setBackgroundResource(R.color.lime);
 
 //                                } else {
                             // 숫자가 아니네?
@@ -225,10 +232,9 @@ public class SettingInsulinActivity extends AppCompatActivity implements View.On
 //                builder14.show();
 //                break;
 
+            // 저장
             case R.id.set_btn:
-                // 저장
-
-                String result = "";  // 결과를 출력할 문자열  ,  항상 스트링은 빈문자열로 초기화 하는 습관을 가지자
+                String result = "";
                 if (checkbox1.isChecked()) result += checkbox1.getText().toString();
                 if (checkbox2.isChecked()) result += checkbox2.getText().toString();
                 if (checkbox3.isChecked()) result += checkbox3.getText().toString();

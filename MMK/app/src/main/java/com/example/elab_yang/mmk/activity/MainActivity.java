@@ -24,6 +24,13 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.example.elab_yang.mmk.R;
+import com.example.elab_yang.mmk.activity.navi.AppGuidenceActivity;
+import com.example.elab_yang.mmk.activity.navi.EditProfileActivity;
+import com.example.elab_yang.mmk.activity.navi.EduYoutubeActivity;
+import com.example.elab_yang.mmk.activity.navi.ProfileActivity;
+import com.example.elab_yang.mmk.activity.navi.SettingInsulinActivity;
+import com.example.elab_yang.mmk.activity.navi.TwoInsulinActivity;
+import com.example.elab_yang.mmk.activity.navi.ViewInsulinActivity;
 import com.example.elab_yang.mmk.adapter.DeviceAdapter;
 import com.example.elab_yang.mmk.model.Device;
 
@@ -36,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final String TAG = "MainActivity";
     SharedPreferences pref;
     Context mContext;
+    DrawerLayout drawer;
     RecyclerView recyclerView;
     DeviceAdapter deviceAdapter;
     HashSet<Device> deviceDatabase = new HashSet<>();
@@ -43,35 +51,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //    ImageView big_size_image;
     private Handler mHandler;
     // 처음 클리어 플래그
-    int first_clear_flag = 0;
+    Boolean first_clear_flag = false;
     AlertDialog alert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mContext = this;
         setContentView(R.layout.activity_main);
+        mContext = this;
         setStatusbar();
         check_first();
+        set();
         setNavi();
         Paper.init(this);
         setDevice();
 //        hoxy_first();
-    }
-
-    // 처음인지 확인하자
-    public void check_first() {
-        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
-        first_clear_flag = pref.getInt("first_clear_flag", first_clear_flag);
-        Log.d(TAG, "first_clear_flag = " + first_clear_flag);
-        if (first_clear_flag == 1) {
-            // 너는 처음이 아니다.
-            Log.d(TAG, "check_first: 너는 처음이 아니야");
-        } else {
-            // 너는 처음이야
-            Log.d(TAG, "check_first: 너는 처음이야");
-            hoxy_first();
-        }
     }
 
     // 상태바
@@ -85,6 +79,62 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        View view = getWindow().getDecorView();
 //        view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 //        getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));
+    }
+
+    // 처음인지 확인하자
+    public void check_first() {
+        pref = getSharedPreferences("ActivityPREF", Context.MODE_PRIVATE);
+        // 너는 처음이구나
+        if (pref.getBoolean("first_or_second", false)) {
+            Log.d(TAG, "check_first: 응 나 처음이야");
+            // 사용법 확인하실?
+            // 혹시.. 처음이라면.. 가이드를 해주자
+            hoxy_first();
+        }
+    }
+
+    //
+    public void hoxy_first() {
+        mHandler = new Handler();
+        runOnUiThread(() -> {
+            // 1초 후
+            mHandler.postDelayed(() -> {
+                try {
+                    showDialog();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }, 1000);
+        });
+    }
+
+    // 사용법을 알려드리까요?
+    public void showDialog() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(mContext)
+                // 바깥 터치 잠금
+                .setCancelable(false)
+                .setTitle("HOXY..")
+                .setMessage("사용법을 알려드리겠습니다.")
+                .setPositiveButton("확인", (dialogInterface, which) -> {
+//                    first_clear();
+                    Log.d(TAG, "onClick: 사용법에 대해 ㄱㄱ");
+                    // 가이드액티비티로
+                    // TODO: 2018-11-10  슬라이드인트로
+                    Intent intent = new Intent(MainActivity.this, AppGuidenceActivity.class);
+                    startActivity(intent);
+                    alert.dismiss();
+                })
+                .setNegativeButton("아니오", (dialog1, which) -> {
+                    Log.d(TAG, "onClick: 필요없으시구나..");
+//                    first_clear();
+                    alert.dismiss();
+                });
+        alert = dialog.create();
+        alert.show();
+    }
+
+    public void set() {
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
     }
 
     // 네비게이션메뉴 설정
@@ -122,62 +172,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    // 혹시.. 처음이라면.. 가이드를 해주자
-    public void hoxy_first() {
-        mHandler = new Handler();
-        runOnUiThread(() -> {
-            // 1초 후
-            mHandler.postDelayed(() -> {
-                try {
-                    showDialog();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }, 1000);
-        });
-    }
-
-    // 사용법을 알려드리까요?
-    public void showDialog() {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(mContext)
-                // 바깥 터치 잠금
-                .setCancelable(false)
-                .setTitle("HOXY..")
-                .setMessage("사용법을 알려드리겠습니다.")
-                .setPositiveButton("확인", (dialogInterface, which) -> {
-                    first_clear();
-                    Log.d(TAG, "onClick: 사용법에 대해 ㄱㄱ");
-                    Intent intent = new Intent(MainActivity.this, AppGuidenceActivity.class);
-                    startActivity(intent);
-                    alert.dismiss();
-                })
-                .setNegativeButton("아니오", (dialog1, which) -> {
-                    Log.d(TAG, "onClick: 필요없으시구나..");
-                    first_clear();
-                    alert.dismiss();
-                });
-        alert = dialog.create();
-        alert.show();
-    }
-
-    // 처음인지 아닌지 구분하자
-    public void first_clear() {
-        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        first_clear_flag = 1;
-        // first_clear_flag == 1 : 처음 사용하느 유저가 아니다~
-        editor.putInt("first_clear_flag", first_clear_flag);
-//        Boolean aa = true;
-//        editor.putBoolean("first_or_second", aa);
-
-        editor.apply();
-//        finish();
-    }
-
     // 뒤로가기 버튼 클릭시
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        // 네비 접힘
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -188,12 +186,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     // 네비게이션메뉴 클릭 이벤트
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        pref = getSharedPreferences("pref", MODE_PRIVATE);
         int id = menuItem.getItemId();
         switch (id) {
             case R.id.nav_profile:
                 // 호구조사
+                Log.d(TAG, "onNavigationItemSelected: nav_profile");
 //                Toast.makeText(getApplicationContext(),"장치 추가", Toast.LENGTH_SHORT).show();
                 String AAAA = pref.getString("PREF_STRNAME", "");
                 if (AAAA.equals("")) {
@@ -206,50 +204,57 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             case R.id.nav_view_insulin:
                 // 인슐린 보기
+                Log.d(TAG, "onNavigationItemSelected: nav_view_insulin");
 //                Toast.makeText(getApplicationContext(),"인슐린 보기", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(MainActivity.this, ViewInsulinActivity.class));
                 break;
 
             case R.id.nav_set_insulin:
                 // 인슐린 설정
+                Log.d(TAG, "onNavigationItemSelected: nav_set_insulin");
                 onCreateDialog();
                 Toast.makeText(getApplicationContext(), "인슐린 설정", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.nav_add_device:
                 // 장치 추가
+                Log.d(TAG, "onNavigationItemSelected: nav_add_device");
                 Toast.makeText(getApplicationContext(), "장치 추가", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(MainActivity.this, NeedleScanActivity.class));
                 break;
 
             case R.id.nav_view_database:
                 // VIEW DATABASE
+                Log.d(TAG, "onNavigationItemSelected: nav_view_database");
                 Toast.makeText(getApplicationContext(), "VIEW DATABASE", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(MainActivity.this, DataBaseActivity.class));
                 break;
 
             case R.id.nav_education:
                 // 유튜브 영상 페이지 설정
+                Log.d(TAG, "onNavigationItemSelected: nav_education");
 //                Toast.makeText(getApplicationContext(), "인슐린 설정", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(MainActivity.this, EduYoutubeActivity.class));
                 break;
 
             case R.id.nav_edit_profile:
                 // 개인정보 입력
+                Log.d(TAG, "onNavigationItemSelected: nav_edit_profile");
 //                Toast.makeText(getApplicationContext(), "개인정보 입력", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(MainActivity.this, EditProfileActivity.class));
                 break;
 
             case R.id.nav_delete_database:
                 // DATABASE + CACHE CLEAR;
+                Log.d(TAG, "onNavigationItemSelected: nav_delete_database");
                 Toast.makeText(getApplicationContext(), "DATABASE + CACHE CLEAR", Toast.LENGTH_SHORT).show();
 //                startActivity(new Intent(MainActivity.this, SettingActivity.class));
-                Intent intent = new Intent(MainActivity.this, DeleteDataBaseActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(MainActivity.this, DeleteDataBaseActivity.class));
                 break;
 
             case R.id.nav_its_me:
                 // 개발자 정보
+                Log.d(TAG, "onNavigationItemSelected: nav_its_me");
                 Toast.makeText(getApplicationContext(), "개발자 정보", Toast.LENGTH_SHORT).show();
 //                startActivity(new Intent(MainActivity.this, SettingActivity.class));
                 break;
@@ -268,7 +273,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         final String[] items = {"인슐린 1개", "인슐린 2개", "알ㅡ약"};
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setTitle("선택해")
+                // 이거 뺴는게 맞나?
                 .setCancelable(false)
+                ////
                 .setSingleChoiceItems(items, 0, (DialogInterface dialog, int which) -> {
                     Toast.makeText(MainActivity.this, items[which], Toast.LENGTH_SHORT).show();
                     if (which == 0) {

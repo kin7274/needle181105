@@ -1,4 +1,4 @@
-package com.example.elab_yang.mmk.activity;
+package com.example.elab_yang.mmk.activity.navi;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -72,7 +72,6 @@ public class EditProfileActivity extends AppCompatActivity {
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
     }
-
 //    public void set() {
 //
 //    }

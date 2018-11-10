@@ -1,25 +1,22 @@
-package com.example.elab_yang.mmk.activity;
+package com.example.elab_yang.mmk.activity.navi;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.example.elab_yang.mmk.R;
-import com.example.elab_yang.mmk.activity.YoutubeAdapter;
-import com.example.elab_yang.mmk.activity.YoutubeItem;
+import com.example.elab_yang.mmk.adapter.YoutubeAdapter;
+import com.example.elab_yang.mmk.model.YoutubeItem;
 
 import java.util.ArrayList;
 import java.util.List;
