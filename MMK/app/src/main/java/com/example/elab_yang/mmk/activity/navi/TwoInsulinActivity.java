@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -54,7 +55,7 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
         card13.setOnClickListener(this);
 
         card14 = (CardView) findViewById(R.id.card14);
-        card14.setOnClickListener(this);
+//        card14.setOnClickListener(this);
 
         card21 = (CardView) findViewById(R.id.card21);
         card21.setOnClickListener(this);
@@ -66,7 +67,7 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
         card23.setOnClickListener(this);
 
         card24 = (CardView) findViewById(R.id.card24);
-        card24.setOnClickListener(this);
+//        card24.setOnClickListener(this);
 
         text11 = (TextView) findViewById(R.id.text11);
         text12 = (TextView) findViewById(R.id.text12);
@@ -104,9 +105,14 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
         if (checkbox11.isChecked() || checkbox12.isChecked() || checkbox13.isChecked() || checkbox14.isChecked()) {
             card14.setBackgroundResource(R.color.lime);
+        } else {
+            card14.setBackgroundResource(R.color.white);
         }
+
         if (checkbox21.isChecked() || checkbox22.isChecked() || checkbox23.isChecked() || checkbox24.isChecked()) {
             card24.setBackgroundResource(R.color.lime);
+        } else {
+            card24.setBackgroundResource(R.color.white);
         }
 
         //// 1번 설정에 관해
@@ -184,25 +190,19 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
             case R.id.card13:
                 // 단위
                 final EditText et = new EditText(this);
+                et.setInputType(InputType.TYPE_CLASS_NUMBER);
                 AlertDialog.Builder builder13 = new AlertDialog.Builder(this)
-                        // 숫자만 입력가능하도록, 키패드를 띄울까?
                         .setTitle("1-3. 단위")
                         .setPositiveButton("저장", (dialog, position) -> {
                             set1[2] = et.getText().toString();
-                            // 입력한 값이 숫자인지 확인
-//                                if (Pattern.matches("^[0-9]+$", settingdata1[2])) {
-                            // 숫자인 경우
                             text13.setText(et.getText().toString());
                             card13.setBackgroundResource(R.color.lime);
-//                                } else {
-                            // 숫자가 아니네?
-//                                    Toast.makeText(getApplicationContext(), "숫자만 입력해주세요", Toast.LENGTH_SHORT).show();
-//                                }
                         })
                         .setView(et);
                 builder13.create();
                 builder13.show();
                 break;
+
 //            case R.id.text14:
             // 투약시간
 //                ArrayAdapter<String> adapter14 = new ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice, items6);
@@ -273,25 +273,19 @@ public class TwoInsulinActivity extends AppCompatActivity implements View.OnClic
             case R.id.card23:
                 // 단위
                 final EditText et2 = new EditText(this);
+                et2.setInputType(InputType.TYPE_CLASS_NUMBER);
                 AlertDialog.Builder builder23 = new AlertDialog.Builder(this)
-                        // 숫자만 입력가능하도록, 키패드를 띄울까?
                         .setTitle("2-3. 단위")
                         .setPositiveButton("저장", (dialog, position) -> {
                             set2[2] = et2.getText().toString();
-                            // 입력한 값이 숫자인지 확인
-//                                if (Pattern.matches("^[0-9]+$", settingdata1[2])) {
-                            // 숫자인 경우
                             text23.setText(et2.getText().toString());
                             card23.setBackgroundResource(R.color.lime);
-//                                } else {
-                            // 숫자가 아니네?
-//                                    Toast.makeText(getApplicationContext(), "숫자만 입력해주세요", Toast.LENGTH_SHORT).show();
-//                                }
                         })
                         .setView(et2);
                 builder23.create();
                 builder23.show();
                 break;
+
 //            case R.id.text24:
             // 투약시간
 //                ArrayAdapter<String> adapter24 = new ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice, items6);

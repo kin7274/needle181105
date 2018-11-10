@@ -20,16 +20,13 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.example.elab_yang.mmk.R;
-import com.example.elab_yang.mmk.activity.navi.AppGuidenceActivity;
 import com.example.elab_yang.mmk.activity.navi.EditProfileActivity;
 import com.example.elab_yang.mmk.activity.navi.EduYoutubeActivity;
+import com.example.elab_yang.mmk.activity.navi.OneInsulinActivity;
 import com.example.elab_yang.mmk.activity.navi.ProfileActivity;
-import com.example.elab_yang.mmk.activity.navi.SettingInsulinActivity;
 import com.example.elab_yang.mmk.activity.navi.TwoInsulinActivity;
 import com.example.elab_yang.mmk.activity.navi.ViewInsulinActivity;
 import com.example.elab_yang.mmk.adapter.DeviceAdapter;
@@ -229,7 +226,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     if (which == 0) {
                         // 약 1개
 //                    Toast.makeText(getApplicationContext(),"인슐린 1개", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(MainActivity.this, SettingInsulinActivity.class));
+                        startActivity(new Intent(MainActivity.this, OneInsulinActivity.class));
                     } else if (which == 1) {
                         // 약 2개
 //                    Toast.makeText(getApplicationContext(),"인슐린 2개", Toast.LENGTH_SHORT).show();

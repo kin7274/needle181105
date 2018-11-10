@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -25,8 +26,8 @@ import android.widget.Toast;
 
 import com.example.elab_yang.mmk.R;
 
-public class SettingInsulinActivity extends AppCompatActivity implements View.OnClickListener {
-    private static final String TAG = "SettingInsulinActivity";
+public class OneInsulinActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String TAG = "OneInsulinActivity";
     Context mContext;
     // 설정한 1번 약
     String[] set = {"", "", "", ""};
@@ -69,7 +70,7 @@ public class SettingInsulinActivity extends AppCompatActivity implements View.On
         card3.setOnClickListener(this);
 
         card4 = (CardView) findViewById(R.id.card4);
-        card4.setOnClickListener(this);
+
         // 상위품목
         text1 = (TextView) findViewById(R.id.text1);
 //        text1.setOnClickListener(this);
@@ -127,6 +128,8 @@ public class SettingInsulinActivity extends AppCompatActivity implements View.On
 
         if (checkbox1.isChecked() || checkbox2.isChecked() || checkbox3.isChecked() || checkbox4.isChecked()) {
             card4.setBackgroundResource(R.color.lime);
+        } else {
+            card4.setBackgroundResource(R.color.white);
         }
 
         // 스위치문
@@ -183,23 +186,14 @@ public class SettingInsulinActivity extends AppCompatActivity implements View.On
             case R.id.card3:
                 // 단위
                 final EditText et = new EditText(this);
+                // 숫자만 입력가능하도록 해결
+                et.setInputType(InputType.TYPE_CLASS_NUMBER);
                 AlertDialog.Builder builder13 = new AlertDialog.Builder(this)
-                        // 숫자만 입력가능하도록, 키패드를 띄울까?
-                        // TODO: 2018-11-10 키패드를 띄울까
-                        // TODO: 2018-11-10 숫자만 입력가능하도록
                         .setTitle("단위")
                         .setPositiveButton("확인", (dialog, position) -> {
                             set[2] = et.getText().toString();
-                            // 입력한 값이 숫자인지 확인
-//                                if (Pattern.matches("^[0-9]+$", settingdata1[2])) {
-                            // 숫자인 경우
                             text3.setText(et.getText().toString());
                             card3.setBackgroundResource(R.color.lime);
-
-//                                } else {
-                            // 숫자가 아니네?
-//                                    Toast.makeText(getApplicationContext(), "숫자만 입력해주세요", Toast.LENGTH_SHORT).show();
-//                                }
                         })
                         .setView(et);
                 builder13.create();
