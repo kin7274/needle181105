@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         mContext = this;
         setStatusbar();
-        check_first();
         set();
         setNavi();
         Paper.init(this);
@@ -79,69 +78,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        View view = getWindow().getDecorView();
 //        view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 //        getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));
-    }
-
-    // 처음인지 확인하자
-    public void check_first() {
-        pref = getSharedPreferences("ActivityPREF", Context.MODE_PRIVATE);
-        // 너는 처음이구나
-        if (pref.getBoolean("first_or_second", true)) {
-            Log.d(TAG, "check_first: 응 나 처음이야");
-            Log.d(TAG, "check_first: " + false);
-            // 사용법 확인하실?
-            // 혹시.. 처음이라면.. 가이드를 해주자
-            hoxy_first();
-        }
-    }
-
-    //
-    public void hoxy_first() {
-        mHandler = new Handler();
-        runOnUiThread(() -> {
-            // 1초 후
-            mHandler.postDelayed(() -> {
-                try {
-                    showDialog();
-                    check_exec();
-//                    SharedPreferences.Editor editor = pref.edit();
-//                    editor.putBoolean("first_or_second", false);
-//                    editor.apply();
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }, 1000);
-        });
-    }
-
-    private void check_exec(){
-        SharedPreferences.Editor editor = pref.edit();
-        editor.putBoolean("first_or_second", false);
-        editor.apply();
-    }
-    // 사용법을 알려드리까요?
-    public void showDialog() {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(mContext)
-                // 바깥 터치 잠금
-                .setCancelable(false)
-                .setTitle("HOXY..")
-                .setMessage("사용법을 알려드리겠습니다.")
-                .setPositiveButton("확인", (dialogInterface, which) -> {
-//                    first_clear();
-                    Log.d(TAG, "onClick: 사용법에 대해 ㄱㄱ");
-                    // 가이드액티비티로
-                    // TODO: 2018-11-10  슬라이드인트로
-                    Intent intent = new Intent(MainActivity.this, AppGuidenceActivity.class);
-                    startActivity(intent);
-                    alert.dismiss();
-                })
-                .setNegativeButton("아니오", (dialog1, which) -> {
-                    Log.d(TAG, "onClick: 필요없으시구나..");
-//                    first_clear();
-                    alert.dismiss();
-                });
-        alert = dialog.create();
-        alert.show();
     }
 
     public void set() {
