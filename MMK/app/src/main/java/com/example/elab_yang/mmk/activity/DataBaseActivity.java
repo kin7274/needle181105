@@ -27,7 +27,9 @@ import com.example.elab_yang.mmk.model.EventCard;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DataBaseActivity extends AppCompatActivity implements View.OnClickListener {
@@ -59,10 +61,12 @@ public class DataBaseActivity extends AppCompatActivity implements View.OnClickL
         bus.register(this);
         set();
         setRecyclerView();
-
+        getDB();
     }
 
     public void set() {
+        db = new DB(this);
+
         data_exist_layout = (RelativeLayout) findViewById(R.id.data_exist_layout);
         data_0_layout = (RelativeLayout) findViewById(R.id.data_0_layout);
 //        frameLayout = (FrameLayout) findViewById(R.id.frameLayout);
@@ -91,16 +95,6 @@ public class DataBaseActivity extends AppCompatActivity implements View.OnClickL
         } catch (Exception e) {
             e.printStackTrace();
         }
-        // 데이터가 이싸뇽?
-        if (lists.size() > 0) {
-            Log.d(TAG, "setRecyclerView: 있어요");
-            data_exist_layout.setVisibility(View.VISIBLE);
-            data_0_layout.setVisibility(View.GONE);
-        } else {
-            Log.d(TAG, "setRecyclerView: 없엉ㅅ");
-            data_exist_layout.setVisibility(View.GONE);
-            data_0_layout.setVisibility(View.VISIBLE);
-        }
         mAdapter = new MyRecyclerAdapter(lists);
 //        mAdapter.setOnClickListener((MyRecyclerAdapter.MyRecyclerViewClickListener) this);
         recycler_view.setAdapter(mAdapter);
@@ -124,6 +118,17 @@ public class DataBaseActivity extends AppCompatActivity implements View.OnClickL
 //            cursor.getString(2) = 인슐린 종류;
             Log.d(TAG, "약값은 " + cursor.getString(2));
             lists.add(new CardItem(setImage(cursor.getString(2)), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), setImage2(cursor.getString(5))));
+        }
+
+        // 데이터가 이싸뇽?
+        if (data.equals("")) {
+            Log.d(TAG, "setRecyclerView: 없엉ㅅ");
+            data_exist_layout.setVisibility(View.GONE);
+            data_0_layout.setVisibility(View.VISIBLE);
+        } else {
+            Log.d(TAG, "getDB: 있어요");
+            data_exist_layout.setVisibility(View.VISIBLE);
+            data_0_layout.setVisibility(View.GONE);
         }
         mAdapter.notifyDataSetChanged();
         cursor.close();
@@ -177,7 +182,7 @@ public class DataBaseActivity extends AppCompatActivity implements View.OnClickL
             // 지혼
             return R.mipmap.ji_hon;
         } else {
-            return R.mipmap.ic_launcher_background;
+            return R.mipmap.happyvirus;
         }
     }
 
@@ -192,7 +197,7 @@ public class DataBaseActivity extends AppCompatActivity implements View.OnClickL
         } else if (str.equals("취침전")) {
             return R.mipmap.yellow1;
         } else {
-            return R.mipmap.ic_launcher_background;
+            return R.mipmap.happyvirus;
         }
     }
 
@@ -224,26 +229,28 @@ public class DataBaseActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onBackPressed() {
         Toast.makeText(getApplicationContext(), "뒤로가기버튼 누름", Toast.LENGTH_SHORT).show();
-        showDialog("골라", "저장할까?");
+//        showDialog("골라", "저장할까?");
+        DataBaseActivity.this.set_setDB();
+        DataBaseActivity.this.finish();
     }
 
     // 뒤로가기 - 다이얼로그
-    public void showDialog(String title, String context) {
-        android.app.AlertDialog.Builder dialog = new android.app.AlertDialog.Builder(this);
-        dialog.setTitle(title)
-                .setMessage(context)
-                .setPositiveButton("YES", (dialogInterface, which) -> {
-                    // 새로고침 한번 하겠다는 뜻
-                    DataBaseActivity.this.set_setDB();
-                    DataBaseActivity.this.finish();
-                })
-                .setNegativeButton("NO", (dialogInterface, which) -> {
-                    // 그냥 나가겠다는 뜻
-                    finish();
-                });
-        dialog.create();
-        dialog.show();
-    }
+//    public void showDialog(String title, String context) {
+//        android.app.AlertDialog.Builder dialog = new android.app.AlertDialog.Builder(this);
+//        dialog.setTitle(title)
+//                .setMessage(context)
+//                .setPositiveButton("YES", (dialogInterface, which) -> {
+//                    // 새로고침 한번 하겠다는 뜻
+//                    DataBaseActivity.this.set_setDB();
+//                    DataBaseActivity.this.finish();
+//                })
+//                .setNegativeButton("NO", (dialogInterface, which) -> {
+//                    // 그냥 나가겠다는 뜻
+//                    finish();
+//                });
+//        dialog.create();
+//        dialog.show();
+//    }
 
     @Override
     public void onStart() {
@@ -259,7 +266,7 @@ public class DataBaseActivity extends AppCompatActivity implements View.OnClickL
 
     @Subscribe
     public void getEventFromAdapter(EventCard event) {
-        Log.e(TAG, "getEventFromAdapter: " + event.getKind() + event.getName() + event.getTime() + event.getPosistion());
+        Log.e(TAG, "getEventFromAdapter22 : " + event.getPosistion() + event.getTime() + event.getKind() + event.getName() + event.getUnit() + event.getState());
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View view = LayoutInflater.from(DataBaseActivity.this).inflate(R.layout.db_refresh_edit_box, null, false);
@@ -270,6 +277,12 @@ public class DataBaseActivity extends AppCompatActivity implements View.OnClickL
         final EditText edit3 = (EditText) view.findViewById(R.id.edit3);
         final EditText edit4 = (EditText) view.findViewById(R.id.edit4);
         final EditText edit5 = (EditText) view.findViewById(R.id.edit5);
+        // 기존값 가져오기
+        edit1.setText(event.getTime());
+        edit2.setText(event.getKind());
+        edit3.setText(event.getName());
+        edit4.setText(event.getUnit());
+        edit5.setText(event.getState());
         ButtonSubmit.setText("삽입");
         final AlertDialog dialog = builder.create();
         ButtonSubmit.setOnClickListener(v1 -> {
@@ -293,10 +306,6 @@ public class DataBaseActivity extends AppCompatActivity implements View.OnClickL
         // TODO: 2018-11-10 입력 양식 정해주기
         if (v.getId() == R.id.add_btn) {
             showdialog_add();
-
-            // 디비를 가져와
-            db = new DB(this);
-            getDB();
         }
     }
 
@@ -312,6 +321,45 @@ public class DataBaseActivity extends AppCompatActivity implements View.OnClickL
         final EditText edit3 = (EditText) view.findViewById(R.id.edit3);
         final EditText edit4 = (EditText) view.findViewById(R.id.edit4);
         final EditText edit5 = (EditText) view.findViewById(R.id.edit5);
+
+        // 현재시간을 msec 으로 구한다.
+        long now = System.currentTimeMillis();
+        // 현재시간을 date 변수에 저장한다.
+        Date date = new Date(now);
+        // 시간을 나타냇 포맷을 정한다 ( yyyy/MM/dd 같은 형태로 변형 가능 )
+        SimpleDateFormat sdfNow = new SimpleDateFormat("yyyy.MM.dd HH:mm");
+        String formatDate = sdfNow.format(date);
+
+        SimpleDateFormat hhNow = new SimpleDateFormat("HH");
+        int hh = Integer.parseInt(hhNow.format(date));
+        Log.d(TAG, "showdialog_add: hh = " + hh);
+
+        String add_state;
+
+        if ((hh >= 5) && (hh < 11)) {
+            // 아침
+            add_state = "아침전";
+
+        } else if ((hh >= 11) && (hh < 16)) {
+            // 점심
+            add_state = "점심전";
+
+        } else if ((hh >= 16) && (hh < 21)) {
+            // 저녁
+            add_state = "저녁전";
+        } else {
+            // 취침전
+            add_state = "취침전";
+        }
+
+        // default
+        edit1.setText(formatDate);
+//        edit2.setText();
+//        edit3.setText();
+        edit4.setText("10");
+        edit5.setText(add_state);
+
+
         ButtonSubmit.setText("삽입");
         final AlertDialog dialog = builder.create();
         ButtonSubmit.setOnClickListener(v1 -> {

@@ -20,9 +20,12 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.elab_yang.mmk.R;
+import com.example.elab_yang.mmk.activity.navi.AlyakActivity;
+import com.example.elab_yang.mmk.activity.navi.BottombarActivity;
 import com.example.elab_yang.mmk.activity.navi.EditProfileActivity;
 import com.example.elab_yang.mmk.activity.navi.EduYoutubeActivity;
 import com.example.elab_yang.mmk.activity.navi.OneInsulinActivity;
@@ -80,6 +83,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void set() {
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        Button test1 = (Button) findViewById(R.id.test1);
+        test1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, BottombarActivity.class));
+            }
+        });
     }
 
     // 네비게이션메뉴 설정
@@ -218,9 +229,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         final String[] items = {"인슐린 1개", "인슐린 2개", "알ㅡ약"};
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setTitle("선택해")
-                // 이거 뺴는게 맞나?
-                .setCancelable(false)
-                ////
+//                .setCancelable(false)
                 .setSingleChoiceItems(items, 0, (DialogInterface dialog, int which) -> {
                     Toast.makeText(MainActivity.this, items[which], Toast.LENGTH_SHORT).show();
                     if (which == 0) {

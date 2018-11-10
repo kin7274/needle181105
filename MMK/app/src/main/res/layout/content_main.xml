@@ -18,6 +18,13 @@
         android:background="@color/background"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
 
+    <Button
+        android:id="@+id/test1"
+        style="?attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/background" />
+
     <ImageView
         android:id="@+id/big_size_image"
         android:layout_width="match_parent"

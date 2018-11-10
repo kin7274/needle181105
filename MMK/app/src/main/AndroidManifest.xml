@@ -126,7 +126,7 @@
 
         <!--혈당강하제용-->
         <activity
-            android:name=".activity.AlyakActivity"
+            android:name=".activity.navi.AlyakActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
@@ -134,6 +134,13 @@
         <service
             android:name=".service.BluetoothLeService"
             android:enabled="true" />
+
+        <!--바텀바 확인용-->
+        <activity
+            android:name=".activity.navi.BottombarActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
     </application>
 
 </manifest>

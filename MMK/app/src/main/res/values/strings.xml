@@ -29,11 +29,6 @@
     <string name="page1_title">대한민국의 어머니들</string>
 
 
-
-
-
-
-
     <!--블루투스-->
     <string name="permission_alert_title">This app needs location access</string>
     <string name="permission_alert_message">Please grant location access so this app can detect peripherals.</string>
@@ -83,4 +78,7 @@
     <string name="state_0_1">점심식전</string>
     <string name="state_0_2">저녁식전</string>
     <string name="state_0_3">취침전</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
