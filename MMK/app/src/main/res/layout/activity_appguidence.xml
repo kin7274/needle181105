@@ -6,9 +6,12 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fontFamily="@string/app_name"
+        android:fontFamily="@font/my_font_family"
         android:gravity="center_vertical|center_horizontal"
-        android:text="hello world"
+        android:text="1. 투약 설정
+2. 장치 추가
+3. 연결
+4. 데이터 확인"
         android:textColor="@color/black"
         android:textSize="30sp" />
 </android.support.constraint.ConstraintLayout>

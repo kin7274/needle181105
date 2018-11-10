@@ -15,6 +15,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.elab_yang.mmk.R;
@@ -33,6 +36,9 @@ import java.util.List;
 public class DataBaseActivity extends AppCompatActivity {
     private final static String TAG = DataBaseActivity.class.getSimpleName();
     Context mContext;
+    //    FrameLayout frameLayout;
+    RelativeLayout data_exist_layout;
+    RelativeLayout data_0_layout;
     DB db;
     SQLiteDatabase sql;
 
@@ -44,6 +50,8 @@ public class DataBaseActivity extends AppCompatActivity {
     private MyRecyclerAdapter mAdapter;
     RecyclerView recycler_view;
 
+    ImageView image_question;
+
     EventBus bus = EventBus.getDefault();
 
     @Override
@@ -53,6 +61,14 @@ public class DataBaseActivity extends AppCompatActivity {
         bus.register(this);
         mContext = this;
         setRecyclerView();
+
+        data_exist_layout = (RelativeLayout) findViewById(R.id.data_exist_layout);
+        data_0_layout = (RelativeLayout) findViewById(R.id.data_0_layout);
+
+        image_question = (ImageView) findViewById(R.id.image_question);
+
+//        frameLayout = (FrameLayout) findViewById(R.id.frameLayout);
+
         add_btn = (Button) findViewById(R.id.add_btn);
         add_btn.setOnClickListener(v -> {
 //            selectDialog();
@@ -77,10 +93,13 @@ public class DataBaseActivity extends AppCompatActivity {
                 String strEdit5 = edit3.getText().toString();
                 // 디뽈트값
                 lists.add(new CardItem(setImage(strEdit1), strEdit1, strEdit2, strEdit3, strEdit4, strEdit5, setImage2(strEdit5)));
+                if(lists.size() == 1){
+                    data_exist_layout.setVisibility(View.VISIBLE);
+                    data_0_layout.setVisibility(View.GONE);
+                }
                 mAdapter.notifyDataSetChanged();
                 dialog.dismiss();
             });
-
             dialog.show();
         });
         db = new DB(this);
@@ -90,6 +109,10 @@ public class DataBaseActivity extends AppCompatActivity {
     public void setRecyclerView() {
         // 객체 생성
         recycler_view = (RecyclerView) findViewById(R.id.recycler_view);
+
+//        image_question.setVisibility(frameLayout.GONE);
+//        recycler_view.setVisibility(frameLayout.VISIBLE);
+
         recycler_view.setHasFixedSize(false);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         // 반대로 쌓기
@@ -109,6 +132,7 @@ public class DataBaseActivity extends AppCompatActivity {
 
     public void getDB() {
         sql = db.getReadableDatabase();
+
         // 화면 clear
         data = "";
         Cursor cursor;
@@ -125,10 +149,19 @@ public class DataBaseActivity extends AppCompatActivity {
             Log.d(TAG, "약값은 " + cursor.getString(2));
             lists.add(new CardItem(setImage(cursor.getString(2)), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), setImage2(cursor.getString(5))));
         }
-        mAdapter.notifyDataSetChanged();
-        cursor.close();
-        sql.close();
-        Toast.makeText(getApplicationContext(), "조회하였습니다.", Toast.LENGTH_SHORT).show();
+        if (data.equals("")) {
+            // 데이터 없는거고
+            data_exist_layout.setVisibility(View.GONE);
+            data_0_layout.setVisibility(View.VISIBLE);
+        } else {
+            data_exist_layout.setVisibility(View.VISIBLE);
+            data_0_layout.setVisibility(View.GONE);
+            mAdapter.notifyDataSetChanged();
+            cursor.close();
+            sql.close();
+            Toast.makeText(getApplicationContext(), "조회하였습니다.", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     public int setImage(String str) {
@@ -137,18 +170,18 @@ public class DataBaseActivity extends AppCompatActivity {
             return R.mipmap.red;
         } else if (str.equals("속효성")) {
             return R.mipmap.bae;
-        } else if (str.equals("중간성")) {
+        } else if (str.equals("중간형")) {
             return R.mipmap.green;
         } else if (str.equals("지속성")) {
             return R.mipmap.yellow;
         } else if (str.equals("혼합형")) {
             return R.mipmap.blue;
-        } else {
-            // 2가지인 경우
-            if (str.contains("초속효성") && str.contains("속효성")) {
+        }
+// 2가지인 경우
+        else if (str.contains("초속효성") && str.contains("속효성")) {
                 // 초속
                 return R.mipmap.cho_sok;
-            } else if (str.contains("초속효성") && str.contains("중간성")) {
+            } else if (str.contains("초속효성") && str.contains("중간형")) {
                 // 초중
                 return R.mipmap.cho_joong;
             } else if (str.contains("초속효성") && str.contains("지속성")) {
@@ -157,7 +190,7 @@ public class DataBaseActivity extends AppCompatActivity {
             } else if (str.contains("초속효성") && str.contains("혼합형")) {
                 // 초혼
                 return R.mipmap.cho_hon;
-            } else if (str.contains("속효성") && str.contains("중간성")) {
+            } else if (str.contains("속효성") && str.contains("중간형")) {
                 // 속중
                 return R.mipmap.sok_joong;
             } else if (str.contains("속효성") && str.contains("지속성")) {
@@ -166,10 +199,10 @@ public class DataBaseActivity extends AppCompatActivity {
             } else if (str.contains("속효성") && str.contains("혼합형")) {
                 // 속혼
                 return R.mipmap.sok_hon;
-            } else if (str.contains("중간성") && str.contains("지속성")) {
+            } else if (str.contains("중간형") && str.contains("지속성")) {
                 // 중지
                 return R.mipmap.joong_ji;
-            } else if (str.contains("중간성") && str.contains("혼합형")) {
+            } else if (str.contains("중간형") && str.contains("혼합형")) {
                 // 중혼
                 return R.mipmap.joong_hon;
             } else if (str.contains("지속성") && str.contains("혼합형")) {
@@ -179,7 +212,6 @@ public class DataBaseActivity extends AppCompatActivity {
                 return R.mipmap.ic_launcher_background;
             }
         }
-    }
 
     public int setImage2(String str) {
         if (str.equals("아침식전")) {
@@ -197,7 +229,8 @@ public class DataBaseActivity extends AppCompatActivity {
 
     public void set_setDB() {
         int cnt = lists.size();
-//        Toast.makeText(getApplicationContext(), "cnt = " + cnt, Toast.LENGTH_SHORT).show();
+
+        //        Toast.makeText(getApplicationContext(), "cnt = " + cnt, Toast.LENGTH_SHORT).show();
         sql = db.getWritableDatabase();
         db.onUpgrade(sql, 1, 2);
         for (int i = 0; i < cnt; i++) {
@@ -290,6 +323,4 @@ public class DataBaseActivity extends AppCompatActivity {
 
         dialog.show();
     }
-
-
 }

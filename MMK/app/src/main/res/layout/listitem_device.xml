@@ -37,8 +37,9 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
+            android:fontFamily="@font/my_font_family"
             android:text="1"
-            android:textSize="22sp" />
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/device_address"
@@ -47,8 +48,9 @@
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
+            android:fontFamily="@font/my_font_family"
             android:text="2"
-            android:textSize="16sp" />
+            android:textSize="20sp" />
 
     </LinearLayout>
 

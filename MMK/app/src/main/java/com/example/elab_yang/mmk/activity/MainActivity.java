@@ -34,6 +34,7 @@ import io.paperdb.Paper;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "MainActivity";
+    SharedPreferences pref;
     Context mContext;
     RecyclerView recyclerView;
     DeviceAdapter deviceAdapter;
@@ -166,6 +167,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         first_clear_flag = 1;
         // first_clear_flag == 1 : 처음 사용하느 유저가 아니다~
         editor.putInt("first_clear_flag", first_clear_flag);
+//        Boolean aa = true;
+//        editor.putBoolean("first_or_second", aa);
+
         editor.apply();
 //        finish();
     }

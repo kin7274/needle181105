@@ -1,6 +1,8 @@
 package com.example.elab_yang.mmk.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.view.View;
@@ -12,11 +14,21 @@ import com.example.elab_yang.mmk.R;
 
 public class AppIntroVerticalActivity extends VerticalIntro {
     private static final String TAG = "IntroVertical";
+    SharedPreferences pref;
 
     @Override
     protected void onStart() {
         super.onStart();
+
+        pref = getSharedPreferences("ActivityPREF", Context.MODE_PRIVATE);
+        if(pref.getBoolean("first_or_second", false)){
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
+
+
 
     @Override
     protected void init() {
@@ -25,9 +37,9 @@ public class AppIntroVerticalActivity extends VerticalIntro {
 
         // 1페이지
         addIntroItem(new VerticalIntroItem.Builder()
-                .backgroundColor(R.color.white)
+                .backgroundColor(R.color.gray)
 //                .image(R.drawable.image_drawer_header)
-                .image(R.drawable.image123)
+                .image(R.mipmap.ther)
                 .title("대한민국의 어머니들")
                 .titleSize(30)
                 .titleColor(R.color.black)
@@ -39,7 +51,7 @@ public class AppIntroVerticalActivity extends VerticalIntro {
         // 2페이지
         addIntroItem(new VerticalIntroItem.Builder()
                 .backgroundColor(R.color.ergo_colorPrimary)
-                .image(R.drawable.image_drawer_header)
+                .image(R.mipmap.anal)
 //                .image(R.drawable.image123)
                 .title("편리한 혈당기록 가능")
                 .titleSize(30)
@@ -51,8 +63,8 @@ public class AppIntroVerticalActivity extends VerticalIntro {
 
         // 3페이지
         addIntroItem(new VerticalIntroItem.Builder()
-                .backgroundColor(R.color.colorAccent)
-                .image(R.mipmap.stop_diabetes)
+                .backgroundColor(R.color.lime)
+                .image(R.mipmap.kiosk)
                 .title("멈춰! 당뇨야!")
                 .titleSize(30)
                 .titleColor(R.color.white)
@@ -87,7 +99,12 @@ public class AppIntroVerticalActivity extends VerticalIntro {
 
     @Override
     protected void onDonePressed() {
-//        Intent intent = new Intent(this, DeviceScanActivity.class);
+
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putBoolean("first_or_second", true);
+        editor.apply();
+
+        
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
