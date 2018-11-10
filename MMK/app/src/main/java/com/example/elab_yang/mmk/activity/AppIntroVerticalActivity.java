@@ -34,7 +34,7 @@ public class AppIntroVerticalActivity extends VerticalIntro {
                 .backgroundColor(R.color.gray)
 //                .image(R.drawable.image_drawer_header)
                 .image(R.mipmap.ther)
-                .title("대한민국의 어머니들")
+                .title(R.string.page1_title);
                 .titleSize(30)
                 .titleColor(R.color.black)
                 .text("스마트 니들입니다. KNU 만세")

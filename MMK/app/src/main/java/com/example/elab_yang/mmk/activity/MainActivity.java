@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ArrayList<Device> deviceArrayList;
     //    ImageView big_size_image;
     private Handler mHandler;
-//     처음 클리어 플래그
+    //     처음 클리어 플래그
 //    Boolean first_clear_flag = false;
     AlertDialog alert;
 
