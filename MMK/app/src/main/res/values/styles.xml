@@ -9,8 +9,24 @@
     </style>
 
     <!--네비게이션메뉴-->
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.AppBarOverlay" parent="android:Theme.Holo.Light.DarkActionBar">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:elevation">0dp</item>
+    </style>
+
+    <!--<style name="AppTheme.AppBarOverlay" parent="android:style/Theme" >-->
+    <!--<item name="android:tabWidgetStyle">@style/Widget.TabWidget</item>-->
+    <!--</style>-->
+
+    <!--<style name="Widget.TabWidget" parent="android:Theme">-->
+    <!--<item name="android:tabStripEnabled">false</item>-->
+    <!--</style>-->
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark">
+    <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    출처: http://softwaree.tistory.com/28 [Owl Life]>
 
     <style name="button_style">
         <item name="android:layout_height">match_parent</item>

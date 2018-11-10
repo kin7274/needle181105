@@ -110,8 +110,7 @@ public class AppIntroVerticalActivity extends VerticalIntro {
         pref = getSharedPreferences("ActivityPREF", Context.MODE_PRIVATE);
         if (pref.getBoolean("first_or_second", false)) {
             Log.d(TAG, "check_first: 응 아니야");
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(this, MainActivity.class));
             finish();
         }
     }
@@ -119,7 +118,7 @@ public class AppIntroVerticalActivity extends VerticalIntro {
     // 실행
     private void check_exec() {
         SharedPreferences.Editor editor = pref.edit();
-        editor.putBoolean("first_or_second", false);
+        editor.putBoolean("first_or_second", true);
         editor.apply();
     }
 }

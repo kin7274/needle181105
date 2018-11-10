@@ -12,6 +12,10 @@
     <color name="black">#000</color>
     <color name="red">#ff0000</color>
     <color name="blue">#0000ff</color>
+    <color name="background">#f0fffbeb</color>
+    <color name="ella_tapbar">#ffabab</color>
+    <color name="ella_page_background">#f4899b</color>
+    <color name="weaker_blue">#ce48daf1</color>
 
     <color name="ergo_colorPrimary">#6200EE</color>
     <color name="ergo_colorPrimaryDark">#303F9F</color>

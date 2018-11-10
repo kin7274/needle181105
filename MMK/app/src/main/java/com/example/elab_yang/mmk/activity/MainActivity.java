@@ -19,6 +19,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -69,15 +70,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     // 상태바
     public void setStatusbar() {
-        Window window = getWindow();
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        window.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
+//        Window window = getWindow();
+//        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+//        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//        window.setStatusBarColor(getResources().getColor(R.color.ella_background));
 
         // 앱 아이콘 검정색으로 변경
-//        View view = getWindow().getDecorView();
-//        view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-//        getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));
+        View view = getWindow().getDecorView();
+        view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        getWindow().setStatusBarColor(getResources().getColor(R.color.background));
     }
 
     public void set() {
