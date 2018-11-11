@@ -130,16 +130,16 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
-        <!--BLE서비스-->
-        <service
-            android:name=".service.BluetoothLeService"
-            android:enabled="true" />
-
         <!--바텀바 확인용-->
         <activity
             android:name=".activity.BottomBarActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
+
+        <!--BLE서비스-->
+        <service
+            android:name=".service.BluetoothLeService"
+            android:enabled="true" />
 
     </application>
 
