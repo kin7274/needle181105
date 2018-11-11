@@ -137,7 +137,7 @@
 
         <!--바텀바 확인용-->
         <activity
-            android:name=".activity.navi.BottombarActivity"
+            android:name=".activity.BottomBarActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 

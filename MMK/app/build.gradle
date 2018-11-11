@@ -49,4 +49,7 @@ dependencies {
     implementation project(':verticalintrov2')
     //
     implementation 'com.roughike:bottom-bar:2.3.1'
+    //
+    implementation 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
+
 }

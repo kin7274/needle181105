@@ -25,7 +25,6 @@ import android.widget.Toast;
 
 import com.example.elab_yang.mmk.R;
 import com.example.elab_yang.mmk.activity.navi.AlyakActivity;
-import com.example.elab_yang.mmk.activity.navi.BottombarActivity;
 import com.example.elab_yang.mmk.activity.navi.EditProfileActivity;
 import com.example.elab_yang.mmk.activity.navi.EduYoutubeActivity;
 import com.example.elab_yang.mmk.activity.navi.OneInsulinActivity;
@@ -85,12 +84,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         Button test1 = (Button) findViewById(R.id.test1);
-        test1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, BottombarActivity.class));
-            }
-        });
+        test1.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, BottomBarActivity.class)));
     }
 
     // 네비게이션메뉴 설정
