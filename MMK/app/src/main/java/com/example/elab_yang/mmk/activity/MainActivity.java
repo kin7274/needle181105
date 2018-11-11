@@ -85,6 +85,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Button test1 = (Button) findViewById(R.id.test1);
         test1.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, BottomBarActivity.class)));
+
+        Button test2 = (Button) findViewById(R.id.test2);
+        test2.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, TabsHeaderActivity.class)));
     }
 
     // 네비게이션메뉴 설정

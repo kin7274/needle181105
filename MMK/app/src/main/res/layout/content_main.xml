@@ -10,13 +10,22 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
-        android:layout_width="300dp"
-        android:layout_height="200dp"
+        android:layout_width="250dp"
+        android:layout_height="400dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="115dp"
+        android:layout_marginTop="80dp"
         android:background="@color/background"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+
+    <Button
+        android:id="@+id/test2"
+        style="?attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:background="@color/background" />
 
     <Button
         android:id="@+id/test1"
@@ -32,7 +41,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/recycler_view"
-        android:layout_marginTop="150dp"
         android:scaleType="fitXY"
         android:src="@mipmap/artboard" />
 </RelativeLayout>
