@@ -136,17 +136,17 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
-<<<<<<< HEAD
+
         <activity
             android:name=".activity.TabsHeaderActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-=======
+
         <!--BLE서비스-->
         <service
             android:name=".service.BluetoothLeService"
             android:enabled="true" />
->>>>>>> e6939fd92c113caf596e5603965e566fb00b95e5
+
 
     </application>
 
